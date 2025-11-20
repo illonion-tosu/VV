@@ -1,0 +1,28 @@
+/* Font Family */
+
+/* Body */
+body {
+    margin: 0;
+}
+
+/* Whole Page */
+.main {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 1920px;
+    height: 1080px;
+    background-image: url("static/background.png");
+    margin: 0;
+}
+
+/* Timer */
+.timer {
+    position: absolute;
+    left: 817.9px;
+    top: 301px;
+    font-size: 100px;
+    font-family: "Orlando Caps CG";
+    color: rgb(48, 48, 48);
+    line-height: 1.2;
+}
