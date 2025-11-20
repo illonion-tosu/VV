@@ -24,11 +24,12 @@ body {
 .main {
     position: absolute;
     left: 0;
-    right: 0;
+    top: 0;
     width: 1920px;
     height: 1080px;
     background-image: url("static/background.png");
     margin: 0;
+    overflow: hidden;
 }
 
 /* Timer */
@@ -103,4 +104,19 @@ body {
 @keyframes logo-right-2-animation {
     0% { top: var(--logo-right-below-y); }
     100% { top: var(--logo-right-above-y); }
+}
+
+/* Hand */
+.hand {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 162px;
+    width: 70px;
+    height: 167px;
+    animation: hand-animation 2s ease-in-out infinite alternate;
+}
+@keyframes hand-animation {
+    from { opacity: 0.6; }
+    to { opacity: 1; }
 }
