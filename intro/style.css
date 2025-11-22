@@ -113,14 +113,6 @@ body {
     to { opacity: 1; }
 }
 
-/* Noise */
-.noise {
-    position: absolute;
-    left: 0;
-    top: 0;
-    mix-blend-mode: color-dodge;
-}
-
 /* Sidebar */
 .sidebar {
     position: absolute;

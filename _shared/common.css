@@ -15,3 +15,11 @@
     margin: 0;
     overflow: hidden;
 }
+
+/* Noise */
+.noise {
+    position: absolute;
+    left: 0;
+    top: 0;
+    mix-blend-mode: color-dodge;
+}
