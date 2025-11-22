@@ -7,6 +7,13 @@
     --logo-right-start-y: -190px;
     --logo-right-below-y: calc(var(--logo-right-start-y) + var(--logo-total-movement));
     --logo-right-above-y: calc(var(--logo-right-start-y) - var(--logo-total-movement));
+
+    --background-light-gray: #E1E1E1;
+    --dark-gray: #303030;
+    --solid-dark-gray-border: solid var(--dark-gray);
+    --solid-dark-gray-border-2px: 2px var(--solid-dark-gray-border);
+    --red: darkred;
+    --green: darkgreen;
 }
 
 /* Font Family */
@@ -18,10 +25,13 @@
 /* Body */
 body {
     margin: 0;
+    font-family: "Orlando Caps CG";
 }
 
 /* Whole Page */
-.main { background-image: url("static/background.png"); }
+.main {
+    background-image: url("static/background.png");
+}
 
 /* Timer */
 .timer {
@@ -29,9 +39,8 @@ body {
     left: 50%;
     top: 301px;
     transform: translateX(-50%);
-    font-size: 100px;
-    font-family: "Orlando Caps CG";
-    color: rgb(48, 48, 48);
+    font-size: 6.25em;
+    color: var(--dark-gray);
     line-height: 1.2;
 }
 
@@ -40,15 +49,14 @@ body {
     position: absolute;
     left: -1116px;
     transform: rotate(90deg);
+    animation: var(--logo-animation);
 }
 .logo-left-1 {
     top: var(--logo-left-start-y);
-    animation: var(--logo-animation);
     animation-name: logo-left-1-animation;
 }
 .logo-left-2 {
     top: var(--logo-left-below-y);
-    animation: var(--logo-animation);
     animation-name: logo-left-2-animation;
 }
 @keyframes logo-left-1-animation {
@@ -71,15 +79,14 @@ body {
     position: absolute;
     transform: rotate(-90deg);
     left: 637px;
+    animation: var(--logo-animation);
 }
 .logo-right-1 {
     top: var(--logo-right-start-y);
-    animation: var(--logo-animation);
     animation-name: logo-right-1-animation;
 }
 .logo-right-2 {
     top: var(--logo-right-below-y);
-    animation: var(--logo-animation);
     animation-name: logo-right-2-animation;
 }
 @keyframes logo-right-1-animation {
@@ -128,9 +135,8 @@ body {
     width: 250px;
     height: 1080px;
     color: black;
-    font-size: 1.25rem;
-    background-color: #E1E1E1;
-    font-family: "Orlando Caps CG";
+    font-size: 1.25em;
+    background-color: var(--background-light-gray);
     overflow: hidden;
 }
 
@@ -146,7 +152,7 @@ body {
     top: 0;
     width: 230px;
     height: inherit;
-    border-right: 2px solid rgb(48, 48, 48);
+    border-right: var(--solid-dark-gray-border-2px);
 }
 .sidebar-team-text {
     position: absolute; 
@@ -159,7 +165,7 @@ body {
 /* Sidebar title */
 .sidebar-title {
     padding-top: 10px;
-    font-size: 2rem;
+    font-size: 2em;
 }
 #team-vs-text {
     margin-right: 20px;
@@ -176,11 +182,10 @@ body {
     text-align: center;
     font-family: inherit;
     font-size: inherit;
-    font-weight: inherit;
     background: none;
-    color: rgb(48, 48, 48);
+    color: var(--dark-gray);
     border: none;
-    border-bottom: 1px solid rgb(48, 48, 48);
+    border-bottom: 1px var(--solid-dark-gray-border);
     margin-bottom: 10px;
 }
 .sidebar-input[type="number"]::-webkit-inner-spin-button, 
@@ -199,17 +204,16 @@ body {
     height: 50px;
     border-radius: 10px;
     background: none;
-    border: 2px solid rgb(48, 48, 48);
+    border: var(--solid-dark-gray-border-2px);
     margin-top: 20px;
-    color: rgb(48, 48, 48);
+    color: var(--dark-gray);
     font-family: inherit;
-    font-weight: inherit;
     font-size: inherit;
     cursor: pointer;
 }
 .sidebar-button:active {
-    background-color: rgb(48, 48, 48);
-    color: #E1E1E1;
+    background-color: var(--dark-gray);
+    color: var(--background-light-gray);
 }
 .sidebar-button-large { height: 80px; }
 
@@ -220,7 +224,7 @@ body {
 /* Timer Error Message */
 .timer-error-message {
     margin-top: 10px;
-    color: darkred;
+    color:var(--red);
     margin-right: 20px;
     display: none;
 }
@@ -230,20 +234,20 @@ body {
 
 /* Border Light Pink */
 .light-green-button {
-    border-color: darkgreen;
-    color: darkgreen;
+    border-color: var(--green);
+    color: var(--green);
 }
 .light-green-button:active {
-    background-color: darkgreen;
-    color: #E1E1E1;
+    background-color: var(--green);
+    color: var(--background-light-gray);
 }
 .light-pink-button { 
-    border-color: darkred;
-    color: darkred;
+    border-color:var(--red);
+    color:var(--red);
 }
 .light-pink-button:active {
-    background-color: darkred;
-    color: #E1E1E1;
+    background-color:var(--red);
+    color: var(--background-light-gray);
 }
 
 /* Sidebar custom text */
@@ -254,10 +258,9 @@ body {
     width: 200px;
     height: 100px;
     background-color: #1d8d68;
-    color: rgb(48, 48, 48);
-    border: 2px solid rgb(48, 48, 48);
+    color: var(--dark-gray);
+    border: var(--solid-dark-gray-border-2px);
     font-family: inherit;
-    font-size: 1.25rem;
-    font-weight: inherit;
+    font-size: 1.25em;
     resize: none;
 }
