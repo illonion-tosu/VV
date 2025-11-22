@@ -3,15 +3,26 @@
 }
 
 /* Whole Page */
+body {
+    font-family: "Orlando Caps CG";
+}
 .main { background-image: url("static/background.png"); }
 
 /* Title */
 .title {
     font-size: 66.667px;
-    font-family: "Orlando Caps CG";
     color: var(--dark-gray);
     position: absolute;
     left: 56px;
     top: 29px;
     letter-spacing: -0.5px;
+}
+
+.round-name {
+  font-size: 41.667px;
+  color: var(--dark-gray);
+  position: absolute;
+  left: 57px;
+  top: 98px;
+  letter-spacing:0.5px;
 }
