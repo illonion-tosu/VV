@@ -1,2 +1,17 @@
+:root {
+    --dark-gray: #303030;
+}
+
 /* Whole Page */
 .main { background-image: url("static/background.png"); }
+
+/* Title */
+.title {
+    font-size: 66.667px;
+    font-family: "Orlando Caps CG";
+    color: var(--dark-gray);
+    position: absolute;
+    left: 56px;
+    top: 29px;
+    letter-spacing: -0.5px;
+}

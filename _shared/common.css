@@ -1,3 +1,9 @@
+/* Font Family */
+@font-face {
+    font-family: "Orlando Caps CG";
+    src: url("../fonts/Orlando\ Caps\ CG\ Regular.otf");
+}
+
 /* Whole Page */
 .main {
     position: absolute;

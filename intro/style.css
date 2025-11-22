@@ -16,12 +16,6 @@
     --green: darkgreen;
 }
 
-/* Font Family */
-@font-face {
-    font-family: "Orlando Caps CG";
-    src: url("../fonts/Orlando\ Caps\ CG\ Regular.otf");
-}
-
 /* Body */
 body {
     margin: 0;
