@@ -1,0 +1,26 @@
+{
+    "roundName": "ROUND OF 32",
+    "beatmaps": [
+        {"beatmap_id": 4344435, "mod": "NM", "identifier": "V1"},
+        {"beatmap_id": 4717979, "mod": "NM", "identifier": "V2"},
+        {"beatmap_id": 5059397, "mod": "NM", "identifier": "V3"},
+        {"beatmap_id": 4673006, "mod": "NM", "identifier": "V4"},
+        {"beatmap_id": 3722935, "mod": "NM", "identifier": "V5"},
+        {"beatmap_id": 4276007, "mod": "NM", "identifier": "V6"},
+        {"beatmap_id": 4409621, "mod": "NM", "identifier": "V7"},
+        {"beatmap_id": 4507150, "mod": "HD", "identifier": "V1"},
+        {"beatmap_id": 4360152, "mod": "HD", "identifier": "V2"},
+        {"beatmap_id": 3154910, "mod": "HD", "identifier": "V3"},
+        {"beatmap_id": 4286644, "mod": "HR", "identifier": "V1"},
+        {"beatmap_id": 4491407, "mod": "HR", "identifier": "V2"},
+        {"beatmap_id": 5059460, "mod": "HR", "identifier": "V3"},
+        {"beatmap_id": 431147, "mod": "DT", "identifier": "V1"},
+        {"beatmap_id": 4443610, "mod": "DT", "identifier": "V2"},
+        {"beatmap_id": 2778113, "mod": "DT", "identifier": "V3"},
+        {"beatmap_id": 4304041, "mod": "DT", "identifier": "V4"},
+        {"beatmap_id": 2431781, "mod": "FM", "identifier": "V1"},
+        {"beatmap_id": 3764538, "mod": "FM", "identifier": "V2"},
+        {"beatmap_id": 1430468, "mod": "FM", "identifier": "V3"},
+        {"beatmap_id": 5059452, "mod": "TB", "identifier": "V1"}
+    ]
+}
