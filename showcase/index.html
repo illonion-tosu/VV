@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="style.css">
 
     <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+    <script src="../_shared/core/reconnecting-websocket.min.js"></script>
 </head>
 <body>
     <div class="main">
@@ -17,13 +18,17 @@
 
         <div class="info-box">
             <div class="info-section identifier-section">
-                <div class="section-text identifier-name">V1</div>
+                <div class="section-text identifier-name" id="identifier-name">V1</div>
             </div>
             <div class="info-section mod-section">
-                <div class="section-text name-50px">MOD: <span class="mod-name"></span></div>
+                <div class="section-text name-50px" id="mod-name-container">MOD: <span class="mod-name" id="mod-name"></span></div>
             </div>
-            <div class="info-section title-section">
-                <div class="section-text name-50px">TITLE</div>
+            <div class="title-section">
+                <div class="section-text name-50px" id="title-name-1">TITLE</div>
+                <div class="title-scroll" id="title-scroll">
+                    <div class="section-text name-50px" id="title-name-2">TITLE</div>
+                    <div class="section-text name-50px" id="title-name-3">TITLE</div>
+                </div>
             </div>
             <div class="info-section mapper-section">
                 <div class="section-text mapper-name">MAPPER</div>

@@ -2,6 +2,9 @@
     --stat-section-main-text-padding-left: 14px;
     --light-gray: #E1E1E1;
     --dark-gray: #303030;
+
+    --title-name-animation-time: 20s;
+    --title-name-animation: infiniteScrollTransform var(--title-name-animation-time) infinite linear forwards
 }
 
 /* Whole Page */
@@ -43,7 +46,10 @@ body { font-family: "Orlando Caps CG"; }
     align-items: center;
 }
 /* Section Text */
-.section-text { padding-left: var(--stat-section-main-text-padding-left); }
+.section-text {
+    padding-left: var(--stat-section-main-text-padding-left);
+    white-space: nowrap;
+}
 /* Name 50px */
 .name-50px { font-size: 50px; }
 
@@ -59,8 +65,53 @@ body { font-family: "Orlando Caps CG"; }
 
 /* Title Section */
 .title-section {
+    position: relative;
     margin-top: 42px;
     height: 86px;
+    line-height: 86px;
+}
+.title-section > * {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: inherit;
+    overflow: hidden;
+}
+
+/* Scrolling */
+.title-scroll > * {
+    position: absolute;
+}
+#title-name-2 { animation: var(--title-name-animation) }
+#title-name-3 {
+    animation: var(--title-name-animation);
+    animation-delay: calc(var(--title-name-animation-time) / 2);
+}
+@keyframes infiniteScrollTransform {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    48% {
+        transform: translateX(-100%);
+        opacity: 1;
+    }
+    48.0001%, 49% { 
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    50% {
+        transform: translateX(calc(100% + 14px));
+        opacity: 0;
+    }
+    51% {
+        transform: translateX(calc(100% + 14px));
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
 /* Mapper Section / Replayer Name */
