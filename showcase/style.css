@@ -101,6 +101,7 @@ body { font-family: "Orlando Caps CG"; }
     animation: var(--title-name-animation);
     animation-delay: calc(var(--title-name-animation-time) / -2);
 }
+.title-name { width: max-content; }
 
 /* Mapper Section Scrolling */
 .mapper-scroll > * { position: absolute; }
@@ -109,6 +110,7 @@ body { font-family: "Orlando Caps CG"; }
     animation: var(--mapper-name-animation);
     animation-delay: calc(var(--mapper-name-animation-time) / -2);
 }
+.mapper-name { font-size: 33.333px; width: max-content; }
 
 /* Mapper Section Scrolling */
 .difficulty-scroll > * { position: absolute; }
@@ -148,7 +150,6 @@ body { font-family: "Orlando Caps CG"; }
 
 /* Mapper Section / Replayer Name */
 .replayer-section { height: 44px; }
-.mapper-name { font-size: 33.333px; width: max-content; }
 .replayer-name { font-size: 25px; }
 
 /* Stats Box */

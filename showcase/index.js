@@ -48,6 +48,18 @@ socket.onmessage = async event => {
         setMetadataInformation(`${data.beatmap.artist.toUpperCase()} - ${data.beatmap.title.toUpperCase()}`, titleName1El, titleName2El, titleName3El, "title", titleScrollEl)
         setMetadataInformation(data.beatmap.mapper, mapperName1El, mapperName2El, mapperName3El, "mapper", mapperScrollEl)
         setMetadataInformation(data.beatmap.version, difficultyName1El, difficultyName2El, difficultyName3El, "difficulty", difficultyScrollEl)
+
+        // Mods and Identifier
+        const beatmap = findShowcaseBeatmap(beatmapId)
+        if (beatmap) {
+            identifierNameEl.style.display = "block"
+            identifierNameEl.textContent = beatmap.identifier
+            modNameContainerEl.style.display = "block"
+            modNameEl.textContent = beatmap.mod
+        } else {
+            identifierNameEl.style.display = "none"
+            modNameContainerEl.style.display = "none"
+        }
     }
 }
 
