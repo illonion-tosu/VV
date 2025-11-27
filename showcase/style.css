@@ -67,47 +67,31 @@ body { font-family: "Orlando Caps CG"; }
 /* Mod Section */
 .mod-section { height: 58px; }
 
-/* Title Section */
+/* Metadata Sections */
+.metadata-section { position: relative; }
+.metadata-section > * {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: inherit;
+    overflow: hidden;
+}
+/* Metadata Section Individual */
 .title-section {
-    position: relative;
+    --height: 86px;
     margin-top: 42px;
-    height: 86px;
-    line-height: 86px;
+    height: var(--height);
+    line-height: var(--height);
 }
-.title-section > * {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: inherit;
-    overflow: hidden;
-}
-
-/* Mapper Section */
 .mapper-section {
-    position: relative;
-    height: 44px;
-    line-height: 44px;
+    --height: 44px;
+    height: var(--height);
+    line-height: var(--height);
 }
-.mapper-section > * {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: inherit;
-    overflow: hidden;
-}
-
-/* Difficulty Section */
 .difficulty-section {
-    position: relative;
-    height: 32px;
-    line-height: 32px;
-}
-.difficulty-section > * {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: inherit;
-    overflow: hidden;
+    --height: 32px;
+    height: var(--height);
+    line-height: var(--height);
 }
 
 /* Title Scrolling */
