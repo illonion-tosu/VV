@@ -4,7 +4,9 @@
     --dark-gray: #303030;
 
     --title-name-animation-time: 20s;
-    --title-name-animation: infiniteScrollTransform var(--title-name-animation-time) infinite linear forwards
+    --title-name-animation: infiniteScrollTransform var(--title-name-animation-time) infinite linear forwards;
+    --mapper-name-animation-time: 20s;
+    --mapper-name-animation: infiniteScrollTransform var(--mapper-name-animation-time) infinite linear forwards;
 }
 
 /* Whole Page */
@@ -78,10 +80,22 @@ body { font-family: "Orlando Caps CG"; }
     overflow: hidden;
 }
 
-/* Scrolling */
-.title-scroll > * {
-    position: absolute;
+/* Mapper Section */
+.mapper-section {
+    position: relative;
+    height: 44px;
+    line-height: 44px;
 }
+.mapper-section > * {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: inherit;
+    overflow: hidden;
+}
+
+/* Title Scrolling */
+.title-scroll > * { position: absolute; }
 #title-name-2 { animation: var(--title-name-animation) }
 #title-name-3 {
     animation: var(--title-name-animation);
@@ -114,9 +128,17 @@ body { font-family: "Orlando Caps CG"; }
     }
 }
 
+/* Mapper Section Scrolling */
+.mapper-scroll > * { position: absolute; }
+#mapper-name-2 { animation: var(--mapper-name-animation) }
+#mapper-name-3 {
+    animation: var(--mapper-name-animation);
+    animation-delay: calc(var(--mapper-name-animation-time) / -2);
+}
+
 /* Mapper Section / Replayer Name */
-.mapper-section, .replayer-section { height: 44px; }
-.mapper-name { font-size: 33.333px; }
+.replayer-section { height: 44px; }
+.mapper-name { font-size: 33.333px; width: max-content; }
 .replayer-name { font-size: 25px; }
 
 /* Difficulty Section */
