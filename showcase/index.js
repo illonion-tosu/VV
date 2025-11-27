@@ -45,76 +45,35 @@ socket.onmessage = async event => {
         beatmapChecksum = data.beatmap.checksum
 
         // Metadata
-        // Title
-        const authorTitle = `${data.beatmap.artist.toUpperCase()} - ${data.beatmap.title.toUpperCase()}`
-        titleName1El.textContent = authorTitle
-        titleName2El.textContent = authorTitle
-        titleName3El.textContent = authorTitle
-        const titleWidth = Math.round(
-            Math.max(titleName1El.getBoundingClientRect().width,
-                    titleName2El.getBoundingClientRect().width)
-        )
-        if (titleWidth > 396) {
-            titleName1El.style.display = "none"
-            titleScrollEl.style.display = "block"
-            titleName3El.style.transform = `translateX(calc(100% + 14px))`
-            const timing = 45 * titleWidth
-            document.documentElement.style.setProperty("--title-name-animation-time", `${timing}ms`)
-        } else {
-            titleName1El.style.display = "block"
-            titleScrollEl.style.display = "none"
-        }
-        // Mapper Name
-        const mapper = data.beatmap.mapper
-        mapperName1El.textContent = mapper
-        mapperName2El.textContent = mapper
-        mapperName3El.textContent = mapper
-        // Mapper Width
-        const mapperWidth = Math.round(
-            Math.max(mapperName1El.getBoundingClientRect().width,
-                    mapperName2El.getBoundingClientRect().width)
-        )
-        // Set styling for scrolling
-        mapperName3El.style.transform = `translateX(calc(100% + 14px))`
-        const timing = 45 * mapperWidth
-        document.documentElement.style.setProperty("--mapper-name-animation-time", `${timing}ms`)
-        // Set styling for widths
-        if (mapperWidth > 396) {
-            mapperName1El.style.display = "none"
-            mapperScrollEl.style.display = "block"
-        } else {
-            mapperName1El.style.display = "block"
-            mapperScrollEl.style.display = "none"
-        }
+        setMetadataInformation(`${data.beatmap.artist.toUpperCase()} - ${data.beatmap.title.toUpperCase()}`, titleName1El, titleName2El, titleName3El, "title", titleScrollEl)
+        setMetadataInformation(data.beatmap.mapper, mapperName1El, mapperName2El, mapperName3El, "mapper", mapperScrollEl)
+        setMetadataInformation(data.beatmap.version, difficultyName1El, difficultyName2El, difficultyName3El, "difficulty", difficultyScrollEl)
+    }
+}
 
-        // Difficulty
-        const difficulty = data.beatmap.version
-        difficultyName1El.textContent = difficulty
-        difficultyName2El.textContent = difficulty
-        difficultyName3El.textContent = difficulty
-        const difficultyWidth = Math.round(
-            Math.max(difficultyName1El.getBoundingClientRect().width,
-                    difficultyName2El.getBoundingClientRect().width)
-        )
-        if (difficultyWidth > 396) {
-            difficultyName1El.style.display = "none"
-            difficultyScrollEl.style.display = "block"
-            difficultyName3El.style.transform = `translateX(calc(100% + 14px))`
-            const timing = 45 * difficultyWidth
-            document.documentElement.style.setProperty("--difficulty-name-animation-time", `${timing}ms`)
-        } else {
-            difficultyName1El.style.display = "block"
-            difficultyScrollEl.style.display = "none"
-        }
+function setMetadataInformation(textContent, element1, element2, element3, sectionName, elementScroll) {
+    // Mapper Name
+    element1.textContent = textContent
+    element2.textContent = textContent
+    element3.textContent = textContent
 
-        const beatmap = findShowcaseBeatmap(beatmapId)
-        if (beatmap) {
-            identifierNameEl.textContent = beatmap.identifier
-            modNameContainerEl.style.display = "block"
-            modNameEl.textContent = beatmap.mod.toUpperCase()
-        } else {
-            identifierNameEl.textContent = ""
-            modNameContainerEl.style.display = "none"
-        }
+    // Mapper Width
+    const mapperWidth = Math.round(
+        Math.max(element1.getBoundingClientRect().width,
+                element2.getBoundingClientRect().width)
+    )
+
+    // Set styling for scrolling
+    element3.style.transform = `translateX(calc(100% + 14px))`
+    const timing = 45 * mapperWidth
+    document.documentElement.style.setProperty(`--${sectionName}-name-animation-time`, `${timing}ms`)
+
+    // Set styling for widths
+    if (mapperWidth > 396) {
+        element1.style.display = "none"
+        elementScroll.style.display = "block"
+    } else {
+        element1.style.display = "block"
+        elementScroll.style.display = "none"
     }
 }

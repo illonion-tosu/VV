@@ -115,7 +115,7 @@ body { font-family: "Orlando Caps CG"; }
 #title-name-2 { animation: var(--title-name-animation) }
 #title-name-3 {
     animation: var(--title-name-animation);
-    animation-delay: calc(var(--title-name-animation-time) / 2);
+    animation-delay: calc(var(--title-name-animation-time) / -2);
 }
 
 /* Mapper Section Scrolling */
