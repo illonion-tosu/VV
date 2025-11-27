@@ -28,6 +28,11 @@ const mapperScrollEl = document.getElementById("mapper-scroll")
 const mapperName1El = document.getElementById("mapper-name-1")
 const mapperName2El = document.getElementById("mapper-name-2")
 const mapperName3El = document.getElementById("mapper-name-3")
+// Difficulty
+const difficultyScrollEl = document.getElementById("difficulty-scroll")
+const difficultyName1El = document.getElementById("difficulty-name-1")
+const difficultyName2El = document.getElementById("difficulty-name-2")
+const difficultyName3El = document.getElementById("difficulty-name-3")
 
 const socket = createTosuWsSocket()
 socket.onmessage = async event => {
@@ -59,26 +64,47 @@ socket.onmessage = async event => {
             titleName1El.style.display = "block"
             titleScrollEl.style.display = "none"
         }
-        // Mapper
+        // Mapper Name
         const mapper = data.beatmap.mapper
         mapperName1El.textContent = mapper
         mapperName2El.textContent = mapper
         mapperName3El.textContent = mapper
-        console.log(mapperName1El.getBoundingClientRect().width, mapperName2El.getBoundingClientRect().width)
-        const mapperName = Math.round(
+        // Mapper Width
+        const mapperWidth = Math.round(
             Math.max(mapperName1El.getBoundingClientRect().width,
                     mapperName2El.getBoundingClientRect().width)
         )
-        console.log(mapperName)
-        if (mapperName > 396) {
+        // Set styling for scrolling
+        mapperName3El.style.transform = `translateX(calc(100% + 14px))`
+        const timing = 45 * mapperWidth
+        document.documentElement.style.setProperty("--mapper-name-animation-time", `${timing}ms`)
+        // Set styling for widths
+        if (mapperWidth > 396) {
             mapperName1El.style.display = "none"
             mapperScrollEl.style.display = "block"
-            mapperName3El.style.transform = `translateX(calc(100% + 14px))`
-            const timing = 45 * titleWidth
-            document.documentElement.style.setProperty("--mapper-name-animation-time", `${timing}ms`)
         } else {
             mapperName1El.style.display = "block"
             mapperScrollEl.style.display = "none"
+        }
+
+        // Difficulty
+        const difficulty = data.beatmap.version
+        difficultyName1El.textContent = difficulty
+        difficultyName2El.textContent = difficulty
+        difficultyName3El.textContent = difficulty
+        const difficultyWidth = Math.round(
+            Math.max(difficultyName1El.getBoundingClientRect().width,
+                    difficultyName2El.getBoundingClientRect().width)
+        )
+        if (difficultyWidth > 396) {
+            difficultyName1El.style.display = "none"
+            difficultyScrollEl.style.display = "block"
+            difficultyName3El.style.transform = `translateX(calc(100% + 14px))`
+            const timing = 45 * difficultyWidth
+            document.documentElement.style.setProperty("--difficulty-name-animation-time", `${timing}ms`)
+        } else {
+            difficultyName1El.style.display = "block"
+            difficultyScrollEl.style.display = "none"
         }
 
         const beatmap = findShowcaseBeatmap(beatmapId)
