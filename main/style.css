@@ -15,7 +15,7 @@ body { font-family: "Orlando Caps CG"; }
 .round-name-back {
     position: absolute;
     top: -21px;
-    left: -256px;
+    left: -15px;
 }
 /* Round Name Front */
 .round-name-front {
