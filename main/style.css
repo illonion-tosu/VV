@@ -61,3 +61,37 @@ body { font-family: "Orlando Caps CG"; }
     0% { background-color: rgb(19, 23, 182); }
     100% { background-color: rgb(165, 166, 202)}
 }
+ 
+/* Tourney Name */
+.tourney-name {
+    position: absolute;
+    right: 296.812px;
+    top: 47px;
+    font-size: 41.667px;
+    color: var(--dark-gray);
+    width: 240px;
+    text-align: right;
+    line-height: 30px;
+}
+
+/* Side Rectangles */
+.side-rectangle {
+    background-color: rgb(195, 196, 217);
+    position: absolute;
+    top: 0px;
+    width: 60px;
+    height: 155px;
+}
+.side-rectangle-1 { left: 1680px; }
+.side-rectangle-2 {
+    box-shadow: inset 34px 0px 27px 0px rgba(73, 77, 174, 0.5);
+    left: 1740px;
+}
+.side-rectangle-3 {
+    box-shadow: inset 25px 0px 40px 0px rgba(41, 46, 188, 0.5);
+    left: 1800px;
+}
+.side-rectangle-4 {
+    box-shadow: inset 38px 0px 57px 0px rgba(19, 23, 182, 0.63);
+    left: 1860px;
+}
