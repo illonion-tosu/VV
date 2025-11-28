@@ -95,3 +95,19 @@ body { font-family: "Orlando Caps CG"; }
     box-shadow: inset 38px 0px 57px 0px rgba(19, 23, 182, 0.63);
     left: 1860px;
 }
+
+/* Accuracy Line */
+.accuracy-line {
+    position: absolute;
+    top: 875px;
+    width: 660px;
+    height: 13px;
+}
+.red-accuracy-line {
+    background-color: rgb(171, 72, 128);
+    right: 1260px;
+}
+.blue-accuracy-line {
+    background-color: rgb(73, 77, 174);
+    left: 1260px;
+}
