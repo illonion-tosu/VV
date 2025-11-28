@@ -46,6 +46,10 @@ const statsCsEl = document.getElementById("stats-cs")
 const statsHpEl = document.getElementById("stats-hp")
 const statsOdEl = document.getElementById("stats-od")
 
+// Replayer name
+let currentReplayerName
+const replayerNameEl = document.getElementById("replayer-name")
+
 const socket = createTosuWsSocket()
 socket.onmessage = async event => {
     const data = JSON.parse(event.data)
@@ -95,6 +99,12 @@ socket.onmessage = async event => {
         }
         const secondsCounter = currentLength % 60
         statsLenEl.textContent = `${Math.floor(currentLength / 60)}:${(secondsCounter < 10) ? '0': ''}${secondsCounter}`
+    }
+
+    // Replayer Name
+    if (currentReplayerName !== data.resultsScreen.name) {
+        currentReplayerName = data.resultsScreen.name
+        replayerNameEl.textContent = currentReplayerName
     }
 }
 
