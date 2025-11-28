@@ -9,7 +9,8 @@
     --dot-4-animation-delay: calc(var(--dot-duration) * -0.75);
     --accuracy-line-x: 1260px;
     --team-avatar-x: 11px;
-    --team-name-x: 169.688px;;
+    --team-name-x: 169.688px;
+    --team-seed-x: 169.287px;
 }
 
 /* Whole Body */
@@ -143,4 +144,20 @@ body { font-family: "Orlando Caps CG"; }
 .blue-team-name { 
     color: var(--blue-colour);
     right: var(--team-name-x);
+}
+
+/* Team Seed */
+.team-seed {
+    font-size: 25px;
+    position: absolute;
+    top: 935.5px;
+    letter-spacing: -0.75px;
+}
+.red-team-seed {
+    color: var(--red-colour);
+    left: var(--team-seed-x)
+}
+.blue-team-seed {
+    color: var(--blue-colour);
+    right: var(--team-seed-x)
 }
