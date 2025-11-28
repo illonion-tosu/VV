@@ -1,3 +1,63 @@
-.main {
-    background-image: url("static/background.png")
+:root {
+    --dark-gray: #303030;
+    --dot-duration: 3s;
+    --dot-animation: dotAnimation var(--dot-duration) linear infinite alternate;
+    --dot-2-animation-delay: calc(var(--dot-duration) * -0.25);
+    --dot-3-animation-delay: calc(var(--dot-duration) * -0.5);
+    --dot-4-animation-delay: calc(var(--dot-duration) * -0.75);
+}
+
+/* Whole Body */
+body { font-family: "Orlando Caps CG"; }
+.main { background-image: url("static/background.png") }
+
+/* Round Name Back */
+.round-name-back {
+    position: absolute;
+    top: -21px;
+    left: -256px;
+}
+/* Round Name Front */
+.round-name-front {
+    font-size: 66.667px;
+    color: var(--dark-gray);
+    position: absolute;
+    left: 75.933px;
+    top: 41.237px;
+    letter-spacing: -0.75px;
+}
+
+/* Dots Container */
+.four-dots-container {
+    position: absolute;
+    top: 73px;
+    left: 960px;
+    display: flex;
+    gap: 15px;
+}
+.dot {
+    --dimension: 10px;
+    border-radius: var(--dimension);
+    width: var(--dimension);
+    height: var(--dimension);
+    background-color: rgb(41, 46, 188);
+}
+
+/* Dot Animations */
+.dot-1 { animation: var(--dot-animation) }
+.dot-2 {
+    animation: var(--dot-animation);
+    animation-delay: var(--dot-2-animation-delay);
+}
+.dot-3 {
+    animation: var(--dot-animation);
+    animation-delay: var(--dot-3-animation-delay);
+}
+.dot-4 {
+    animation: var(--dot-animation);
+    animation-delay: var(--dot-4-animation-delay);
+}
+@keyframes dotAnimation {
+    0% { background-color: rgb(19, 23, 182); }
+    100% { background-color: rgb(165, 166, 202)}
 }
