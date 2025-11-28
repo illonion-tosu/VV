@@ -1,4 +1,6 @@
 :root {
+    --red-colour: rgb(171, 72, 128);
+    --blue-colour: rgb(73, 77, 174);
     --dark-gray: #303030;
     --dot-duration: 3s;
     --dot-animation: dotAnimation var(--dot-duration) linear infinite alternate;
@@ -7,6 +9,7 @@
     --dot-4-animation-delay: calc(var(--dot-duration) * -0.75);
     --accuracy-line-x: 1260px;
     --team-avatar-x: 11px;
+    --team-name-x: 169.688px;;
 }
 
 /* Whole Body */
@@ -106,11 +109,11 @@ body { font-family: "Orlando Caps CG"; }
     height: 13px;
 }
 .red-accuracy-line {
-    background-color: rgb(171, 72, 128);
+    background-color: var(--red-colour);
     right: var(--accuracy-line-x);
 }
 .blue-accuracy-line {
-    background-color: rgb(73, 77, 174);
+    background-color: var(--blue-colour);
     left: var(--accuracy-line-x);
 }
 
@@ -125,3 +128,19 @@ body { font-family: "Orlando Caps CG"; }
 }
 .red-team-avatar { left: var(--team-avatar-x); }
 .blue-team-avatar { right: var(--team-avatar-x); }
+
+/* Team Names */
+.team-name {
+    font-size: 50px;
+    position: absolute;
+    top: 890px;
+    letter-spacing: -0.75px;
+}
+.red-team-name { 
+    color: var(--red-colour);
+    left: var(--team-name-x);
+}
+.blue-team-name { 
+    color: var(--blue-colour);
+    right: var(--team-name-x);
+}
