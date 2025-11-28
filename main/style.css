@@ -1,16 +1,29 @@
 :root {
     --red-colour: rgb(171, 72, 128);
     --blue-colour: rgb(73, 77, 174);
-    --dark-gray: #303030;
+    --dark-gray: rgb(48, 48, 48);
+    --background-light-gray: rgb(195, 196, 217);
+    --side-rectangle-2-box-shadow-colour: rgba(73, 77, 174, 0.5);
+    --side-rectangle-3-box-shadow-colour: rgba(41, 46, 188, 0.5);
+    --side-rectangle-4-box-shadow-colour: rgba(19, 23, 182, 0.63);
+
     --dot-duration: 3s;
     --dot-animation: dotAnimation var(--dot-duration) linear infinite alternate;
     --dot-2-animation-delay: calc(var(--dot-duration) * -0.25);
     --dot-3-animation-delay: calc(var(--dot-duration) * -0.5);
     --dot-4-animation-delay: calc(var(--dot-duration) * -0.75);
+
+    --side-rectangle-2-box-shadow: inset 34px 0px 27px 0px var(--side-rectangle-2-box-shadow-colour);
+    --side-rectangle-3-box-shadow: inset 25px 0px 40px 0px var(--side-rectangle-3-box-shadow-colour);
+
     --accuracy-line-x: 1260px;
     --team-avatar-x: 11px;
     --team-name-x: 169.688px;
     --team-seed-x: 169.287px;
+    --bottom-row-side-rectangle-1-x: 0px;
+    --bottom-row-side-rectangle-2-x: 60px;
+    --bottom-row-side-rectangle-3-x: 120px;
+    --bottom-row-side-rectangle-4-x: 180px;
 }
 
 /* Whole Body */
@@ -82,7 +95,7 @@ body { font-family: "Orlando Caps CG"; }
 
 /* Side Rectangles */
 .side-rectangle {
-    background-color: rgb(195, 196, 217);
+    background-color: var(--background-light-gray);
     position: absolute;
     top: 0px;
     width: 60px;
@@ -90,15 +103,15 @@ body { font-family: "Orlando Caps CG"; }
 }
 .side-rectangle-1 { left: 1680px; }
 .side-rectangle-2 {
-    box-shadow: inset 34px 0px 27px 0px rgba(73, 77, 174, 0.5);
+    box-shadow: var(--side-rectangle-2-box-shadow);
     left: 1740px;
 }
 .side-rectangle-3 {
-    box-shadow: inset 25px 0px 40px 0px rgba(41, 46, 188, 0.5);
+    box-shadow: var(--side-rectangle-3-box-shadow);
     left: 1800px;
 }
 .side-rectangle-4 {
-    box-shadow: inset 38px 0px 57px 0px rgba(19, 23, 182, 0.63);
+    box-shadow: inset 38px 0px 57px 0px var(--side-rectangle-4-box-shadow-colour);
     left: 1860px;
 }
 
@@ -176,11 +189,55 @@ body { font-family: "Orlando Caps CG"; }
     right: 170px;
     flex-direction: row-reverse;
 }
-.star-container {
+/* star Wrapper */
+.star-wrapper {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 57px;
     height: 58px;
+}
+
+/* Bottom Row Cosmetics */
+.bottom-row-side-rectangle {
+    background-color: var(--background-light-gray);
+    position: absolute;
+    top: 1029px;
+    height: 51px;
+}
+.bottom-row-side-rectangle-minor-width { width: 60px; }
+
+/* Bottom Row Side 1*/
+.bottom-row-side-rectangle-1-left { left: var(--bottom-row-side-rectangle-1-x); }
+.bottom-row-side-rectangle-1-right { right: var(--bottom-row-side-rectangle-1-x); }
+/* Bottom Row Side 2 */
+.bottom-row-side-rectangle-2-left {
+    left: var(--bottom-row-side-rectangle-2-x);
+    box-shadow: var(--side-rectangle-2-box-shadow);
+}
+.bottom-row-side-rectangle-2-right {
+    right: var(--bottom-row-side-rectangle-2-x);
+    box-shadow: inset -34px 0px 27px 0px var(--side-rectangle-2-box-shadow-colour);
+}
+
+/* Bottom Row Side Rectangle 3 */
+.bottom-row-side-rectangle-3-left {
+    left: var(--bottom-row-side-rectangle-3-x);
+    box-shadow: var(--side-rectangle-3-box-shadow);
+}
+.bottom-row-side-rectangle-3-right {
+    right: var(--bottom-row-side-rectangle-3-x);
+    box-shadow: inset -25px 0px 40px 0px var(--side-rectangle-3-box-shadow-colour);
+}
+
+/* Bottom Row Side Rectangle 4 */
+.bottom-row-side-rectangle-4 { width: 780px; }
+.bottom-row-side-rectangle-4-left {
+    left: var(--bottom-row-side-rectangle-4-x);
+    box-shadow: inset 245px 0px 125px 0px var(--side-rectangle-4-box-shadow-colour);
+}
+.bottom-row-side-rectangle-4-right {
+    right: var(--bottom-row-side-rectangle-4-x);
+    box-shadow: inset -245px 0px 125px 0px var(--side-rectangle-4-box-shadow-colour);
 }
