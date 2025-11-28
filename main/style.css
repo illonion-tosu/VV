@@ -5,6 +5,8 @@
     --dot-2-animation-delay: calc(var(--dot-duration) * -0.25);
     --dot-3-animation-delay: calc(var(--dot-duration) * -0.5);
     --dot-4-animation-delay: calc(var(--dot-duration) * -0.75);
+    --accuracy-line-x: 1260px;
+    --team-avatar-x: 11px;
 }
 
 /* Whole Body */
@@ -105,9 +107,21 @@ body { font-family: "Orlando Caps CG"; }
 }
 .red-accuracy-line {
     background-color: rgb(171, 72, 128);
-    right: 1260px;
+    right: var(--accuracy-line-x);
 }
 .blue-accuracy-line {
     background-color: rgb(73, 77, 174);
-    left: 1260px;
+    left: var(--accuracy-line-x);
 }
+
+/* Team Avatars */
+.team-avatar {
+    --dimension: 137px;
+    border: 3px solid rgb(32, 32, 32);
+    position: absolute;
+    top: 886px;
+    width: var(--dimension);
+    height: var(--dimension);
+}
+.red-team-avatar { left: var(--team-avatar-x); }
+.blue-team-avatar { right: var(--team-avatar-x); }
