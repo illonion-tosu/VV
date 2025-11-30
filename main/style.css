@@ -24,6 +24,7 @@
     --bottom-row-side-rectangle-2-x: 60px;
     --bottom-row-side-rectangle-3-x: 120px;
     --bottom-row-side-rectangle-4-x: 180px;
+    --playing-score-x: 478.5px;
 }
 
 /* Whole Body */
@@ -240,4 +241,22 @@ body { font-family: "Orlando Caps CG"; }
 .bottom-row-side-rectangle-4-right {
     right: var(--bottom-row-side-rectangle-4-x);
     box-shadow: inset -245px 0px 125px 0px var(--side-rectangle-4-box-shadow-colour);
+}
+
+/* Playing Score */
+.playing-score {
+    position: absolute;
+    top: 1029px;
+    font-size: 46px;
+    font-family: "Bell MT";
+    color: rgb(225, 225, 225);
+    letter-spacing: 1px;
+}
+.red-playing-score {
+    left: var(--playing-score-x);
+    transform: scaleY(0.8) translateX(-50%);
+}
+.blue-playing-score {
+    right: var(--playing-score-x);
+    transform: scaleY(0.8) translateX(50%);
 }

@@ -3,6 +3,10 @@
     font-family: "Orlando Caps CG";
     src: url("../fonts/Orlando\ Caps\ CG\ Regular.otf");
 }
+@font-face {
+    font-family: "Bell MT";
+    src: url("../fonts/bell-mt.ttf");
+}
 
 /* Whole Page */
 .main {
