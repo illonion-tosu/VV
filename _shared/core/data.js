@@ -4,6 +4,7 @@ let allBeatmaps = []
 // Load showcase beatmaps
 export async function loadShowcaseBeatmaps() {
     const response = await axios.get("../_data/showcase-beatmaps.json")
+    consol
     allShowcaseBeatmaps = response.data
     return allShowcaseBeatmaps
 }
@@ -15,12 +16,12 @@ export function findShowcaseBeatmap(id) {
 
 // Load Beatmaps
 export async function loadBeatmaps() {
-    const response = await axios.get*("../_data/beatmaps.json")
+    const response = await axios.get("../_data/beatmaps.json")
     allBeatmaps = response.data
     return allBeatmaps
 }
 
 // Find beatmap from Id
-export function findShowcaseBeatmap(id) {
+export function findBeatmap(id) {
     return allBeatmaps.beatmaps.find(b => Number(b.beatmap_id) === Number(id))
 }
