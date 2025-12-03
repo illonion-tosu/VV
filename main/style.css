@@ -322,6 +322,9 @@ body { font-family: "Orlando Caps CG"; }
     transition: 200ms ease-in-out;
 }
 .unknown { color: yellow; }
+.left { color: rgb(255, 0, 0); }
+.right { color: rgb(0, 247, 255); }
+.bot { color: rgb(255, 136, 0); }
 
 /* Bottom Row Cosmetics */
 .bottom-row-side-rectangle {
