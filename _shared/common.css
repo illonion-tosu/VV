@@ -31,4 +31,5 @@
     left: 0;
     top: 0;
     mix-blend-mode: color-dodge;
+    z-index: 1;
 }
