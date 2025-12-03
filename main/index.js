@@ -8,7 +8,6 @@ const roundNameBackEl = document.getElementById("round-name-back")
 let allBeatmaps = []
 Promise.all([loadBeatmaps()]).then(([beatmaps]) => {
     allBeatmaps = beatmaps
-    console.log(allBeatmaps)
     roundNameFrontEl.innerText = allBeatmaps.roundName
     roundNameBackEl.setAttribute("src", `static/rounds/${allBeatmaps.roundName}.png`)
 })
