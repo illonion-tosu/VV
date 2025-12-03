@@ -7,6 +7,12 @@
     font-family: "Bell MT";
     src: url("../fonts/bell-mt.ttf");
 }
+@font-face {
+    font-family: "Torus";
+    src: url("../fonts/Torus\ Bold.otf");
+    font-weight: 700;
+}
+
 
 /* Whole Page */
 .main {

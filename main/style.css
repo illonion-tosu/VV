@@ -30,6 +30,10 @@
     --bottom-row-side-rectangle-3-x: 120px;
     --bottom-row-side-rectangle-4-x: 180px;
     --playing-score-x: 478.5px;
+    --bottom-middle-section-height: 154px;
+    --chat-display-title-height: 35px;
+    --chat-display-padding-left: 10px;
+    --chat-display-container-padding-top: 5px;
 }
 
 /* Whole Body */
@@ -205,20 +209,21 @@ body { font-family: "Orlando Caps CG"; }
     height: 58px;
 }
 
-/* Now Playing Container */
-.now-playing-container {
+/* Bottom Middle Section */
+.bottom-middle-section {
     position: absolute;
     left: 660px;
     top: 875px;
     width: 602px;
-    height: 154px;
+    height: var(--bottom-middle-section-height);
 }
+
 /* Now Playing Overlay */
 .now-playing-overlay {
     position: absolute;
     width: 100%;
     height: 100%;
-    background-color: rgb(51, 51, 51);
+    background-color: var(--dark-gray);
     opacity: 0.902;
 }
 /* Now Playing Border */
@@ -277,6 +282,46 @@ body { font-family: "Orlando Caps CG"; }
     50% { opacity: 0; }
     100% { opacity: 0; }
 }
+
+/* Chat Display */
+.chat-display { background-color: var(--dark-gray); }
+.chat-display-title {
+    position: absolute;
+    width: calc(100% - var(--chat-display-padding-left));
+    height: var(--chat-display-title-height);
+    background-color: var(--background-light-gray);
+    color: white;
+    padding-left: var(--chat-display-padding-left);
+    display: flex;
+    align-items: center;
+    font-size: 1.75em;
+    z-index: 1;
+    transition: 200ms ease-in-out;
+}
+.chat-display-live-title-text {
+    opacity: 1;
+    transition: 100ms ease-in-out;
+}
+.chat-display-container {
+    position: absolute;
+    top: 0;
+    margin-top: 5px;
+    margin-left: var(--chat-display-padding-left);
+    width: calc(100% - var(--chat-display-padding-left) * 2);
+    height: calc(100% -  (var(--chat-display-container-padding-top) * 2));
+    color: var(--playing-score-colour);
+    font-family: "Torus";
+    font-weight: 700;
+    font-size: 1.25em;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    transition: 200ms ease-in-out;
+}
+.unknown { color: yellow; }
 
 /* Bottom Row Cosmetics */
 .bottom-row-side-rectangle {
