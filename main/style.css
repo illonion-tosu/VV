@@ -3,6 +3,7 @@
     --blue-colour: rgb(73, 77, 174);
     --dark-gray: rgb(48, 48, 48);
     --background-light-gray: rgb(195, 196, 217);
+    --chat-title-gray: rgb(125, 125, 125);
     --playing-score-colour: rgb(225, 225, 225);
     --side-rectangle-2-box-shadow-colour: rgba(73, 77, 174, 0.5);
     --side-rectangle-3-box-shadow-colour: rgba(41, 46, 188, 0.5);
@@ -289,7 +290,7 @@ body { font-family: "Orlando Caps CG"; }
     position: absolute;
     width: calc(100% - var(--chat-display-padding-left));
     height: var(--chat-display-title-height);
-    background-color: var(--background-light-gray);
+    background-color: var(--chat-title-gray);
     color: white;
     padding-left: var(--chat-display-padding-left);
     display: flex;
