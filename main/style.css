@@ -285,7 +285,10 @@ body { font-family: "Orlando Caps CG"; }
 }
 
 /* Chat Display */
-.chat-display { background-color: var(--dark-gray); }
+.chat-display {
+    background-color: var(--dark-gray);
+    transition: 500ms ease-in-out;
+}
 .chat-display-title {
     position: absolute;
     width: calc(100% - var(--chat-display-padding-left));
@@ -297,11 +300,11 @@ body { font-family: "Orlando Caps CG"; }
     align-items: center;
     font-size: 1.75em;
     z-index: 1;
-    transition: 200ms ease-in-out;
+    transition: 400ms ease-in-out;
 }
 .chat-display-live-title-text {
     opacity: 1;
-    transition: 100ms ease-in-out;
+    transition: 200ms ease-in-out;
 }
 .chat-display-container {
     position: absolute;

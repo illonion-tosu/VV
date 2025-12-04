@@ -1,5 +1,6 @@
 import { loadBeatmaps, findBeatmap, loadTeams, findTeam } from "../_shared/core/data.js"
 import { createTosuWsSocket } from "../_shared/core/websocket.js"
+import { delay } from "../_shared/core/utils.js"
 
 // Round names
 const roundNameFrontEl = document.getElementById("round-name-front")
@@ -29,9 +30,15 @@ const blueTeamSeedNumberEl = document.getElementById("blue-team-seed-number")
 let redTeamName, blueTeamName
 
 // Chat Display
+const chatDisplayEl = document.getElementById("chat-display")
+const chatDisplayTitleEl = document.getElementById("chat-display-title")
+const chatDisplayLiveTitleTextEl = document.getElementById("chat-display-live-title-text")
 const chatDisplayContainerEl = document.getElementById("chat-display-container")
 // Variables
 let chatLen = 0
+
+// Score visibility
+let scoreVisible
 
 // Socket
 const socket = createTosuWsSocket()
@@ -71,6 +78,26 @@ socket.onmessage = async event => {
 
         chatDisplayContainerEl.append(fragment)
         chatLen = data.tourney.chat.length
+    }
+
+    // Score visibility
+    if (scoreVisible !== data.tourney.scoreVisible) {
+        scoreVisible = data.tourney.scoreVisible
+        if (scoreVisible) {
+            chatDisplayLiveTitleTextEl.style.opacity = 0
+            await delay(210)
+            chatDisplayTitleEl.style.width = 0
+            chatDisplayTitleEl.style.paddingLeft = 0
+            await delay(410)
+            chatDisplayEl.style.height = 0
+        } else {
+            chatDisplayEl.style.height = "154px"
+            await delay(510)
+            chatDisplayTitleEl.style.paddingLeft = `var(--chat-display-padding-left)`
+            chatDisplayTitleEl.style.width = `calc(100% - var(--chat-display-padding-left))`
+            await delay(410)
+            chatDisplayLiveTitleTextEl.style.opacity = 1
+        }
     }
 }
 
