@@ -132,6 +132,7 @@ body { font-family: "Orlando Caps CG"; }
     top: 875px;
     width: 660px;
     height: 13px;
+    transition: 500ms ease-in-out;
 }
 .red-accuracy-line {
     background-color: var(--red-colour);
@@ -259,6 +260,13 @@ body { font-family: "Orlando Caps CG"; }
     flex-direction: column;
     justify-content: space-between;
 }
+.now-playing-metadata > * {
+    width: 551px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 .now-playing-song-title {
     color: var(--playing-score-colour);
     font-size: 25px;
@@ -382,6 +390,7 @@ body { font-family: "Orlando Caps CG"; }
     font-family: "Bell MT";
     color: var(--playing-score-colour);
     letter-spacing: 1px;
+    transition: 500ms ease-in-out;
 }
 .red-playing-score {
     left: var(--playing-score-x);
@@ -398,14 +407,17 @@ body { font-family: "Orlando Caps CG"; }
     left: 50%;
     font-family: "Bell MT";
     color: var(--playing-score-colour);
+    transition: 500ms ease-in-out;
 }
 .difference-text {
     top: 1028.5px;
     font-size: 21px;
     transform: translateX(-50%);
+    opacity: 1;
 }
 .difference-number {
     top: 1044px;
     font-size: 33.333px;
     transform: scaleY(0.8) translateX(-50%);
+    opacity: 1;
 }

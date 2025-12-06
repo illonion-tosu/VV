@@ -1,6 +1,7 @@
 import { loadBeatmaps, findBeatmap, loadTeams, findTeam } from "../_shared/core/data.js"
 import { createTosuWsSocket } from "../_shared/core/websocket.js"
 import { delay } from "../_shared/core/utils.js"
+import CountUp from "../_shared/core/countUp.js"
 
 // Round names
 const roundNameFrontEl = document.getElementById("round-name-front")
@@ -57,6 +58,22 @@ const nowPlayingHpNumberEl = document.getElementById("now-playing-hp-number")
 const nowPlayingOdNumberEl = document.getElementById("now-playing-od-number")
 let beatmapId, beatmapChecksum, updateStats = false
 
+// Playing Scores
+const redPlayingScoreEl = document.getElementById("red-playing-score")
+const bluePlayingScoreEl = document.getElementById("blue-playing-score")
+const playingScoreDifferenceTextEl = document.getElementById("playing-score-difference-text")
+const playingScoreDifferenceEl = document.getElementById("playing-score-difference")
+let currentRedScore, currentBlueScore, numberOfClients, numberOfClientsPerTeam
+
+const redAccuracyLineEl = document.getElementById("red-accuracy-line")
+const blueAccuracyLineEl = document.getElementById("blue-accuracy-line")
+
+const countUpAnimations = {
+    "redPlayingScore": new CountUp(redPlayingScoreEl, 0, 0, 2, 0.2, { useEasing: true, useGrouping: true, separator: ",", decimal: ".", suffix: "%" }),
+    "bluePlayingScore": new CountUp(bluePlayingScoreEl, 0, 0, 2, 0.2, { useEasing: true, useGrouping: true, separator: ",", decimal: ".", suffix: "%" }),
+    "playingScoreDifference": new CountUp(playingScoreDifferenceEl, 0, 0, 2, 0.2, { useEasing: true, useGrouping: true, separator: ",", decimal: ".", suffix: "%" }),
+}
+
 // Socket
 const socket = createTosuWsSocket()
 socket.onmessage = async event => {
@@ -101,19 +118,37 @@ socket.onmessage = async event => {
     if (scoreVisible !== data.tourney.scoreVisible) {
         scoreVisible = data.tourney.scoreVisible
         if (scoreVisible) {
+            // Do chat animation
             chatDisplayLiveTitleTextEl.style.opacity = 0
             await delay(210)
             chatDisplayTitleEl.style.width = 0
             chatDisplayTitleEl.style.paddingLeft = 0
             await delay(410)
             chatDisplayEl.style.height = 0
+
+            // Show scores
+            redPlayingScoreEl.style.opacity = 1
+            bluePlayingScoreEl.style.opacity = 1
+            playingScoreDifferenceTextEl.style.opacity = 1
+            playingScoreDifferenceEl.style.opacity = 1
         } else {
+            // Do chat animation
             chatDisplayEl.style.height = "154px"
             await delay(510)
             chatDisplayTitleEl.style.paddingLeft = `var(--chat-display-padding-left)`
             chatDisplayTitleEl.style.width = `calc(100% - var(--chat-display-padding-left))`
             await delay(410)
             chatDisplayLiveTitleTextEl.style.opacity = 1
+
+            // Hide scores
+            redPlayingScoreEl.style.opacity = 0
+            bluePlayingScoreEl.style.opacity = 0
+            playingScoreDifferenceTextEl.style.opacity = 0
+            playingScoreDifferenceEl.style.opacity = 0
+
+            // Accuracy lines
+            redAccuracyLineEl.style.width = "660px"
+            blueAccuracyLineEl.style.width = "660px"
         }
     }
 
@@ -169,6 +204,40 @@ socket.onmessage = async event => {
         nowPlayingCsNumberEl.textContent = stats.cs
         nowPlayingHpNumberEl.textContent = stats.hp
         nowPlayingOdNumberEl.textContent = stats.od
+    }
+
+    // Number of clients
+    const clients = data.tourney.clients
+    if (numberOfClients !== clients.length) {
+        numberOfClients = clients.length
+        numberOfClientsPerTeam = numberOfClients / 2
+    }
+
+    // Score Display
+    if (scoreVisible) {
+        currentRedScore = 0
+        currentBlueScore = 0
+
+        // Set scores
+        for (let i = 0; i < numberOfClients; i++) {
+            const score = clients[i].play.accuracy
+            if (i < numberOfClientsPerTeam) currentRedScore += score
+            else currentBlueScore += score
+        }
+
+        // Get actual scores
+        currentRedScore /= numberOfClientsPerTeam
+        currentBlueScore /= numberOfClientsPerTeam
+        const scoreDifference = Math.abs(currentRedScore - currentBlueScore)
+
+        // Animations
+        countUpAnimations.redPlayingScore.update(currentRedScore)
+        countUpAnimations.bluePlayingScore.update(currentBlueScore)
+        countUpAnimations.playingScoreDifference.update(scoreDifference)
+
+        // Scorebar animations
+        redAccuracyLineEl.style.width = `${(currentRedScore - 80) / 20 * 660}px`
+        blueAccuracyLineEl.style.width = `${(currentBlueScore - 80) / 20 * 660}px`
     }
 }
 
