@@ -1,6 +1,7 @@
 :root {
     --red-colour: rgb(171, 72, 128);
     --blue-colour: rgb(73, 77, 174);
+    --dark-gray: rgb(48, 48, 48);
 
     --team-avatar-x: 11px;
     --team-name-x: 169.688px;

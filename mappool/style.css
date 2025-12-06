@@ -5,12 +5,25 @@ body { font-family: "Orlando Caps CG"; }
 /* Team Data */
 .team-data { top: 15px; }
 
+/* Round Text */
 .round-text {
     position: absolute;
     left: 50%;
-    top: 78px;
+    top: 21px;
     transform: translateX(-50%);
-    font-size: 33.333px;
-    color: rgb(51, 51, 51);
-    letter-spacing: -0.25px;
+    font-size: 25px;
+    color: var(--dark-gray);
+    text-align: center;
+    line-height: 0.85;
+}
+
+.tournament-name {
+    position: absolute;
+    left: 50%;
+    top: 16px;
+    transform: translateX(-50%);
+    font-size: 25px;
+    color: var(--dark-gray);
+    text-align: center;
+    line-height: 0.9;
 }
