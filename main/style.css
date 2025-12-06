@@ -23,9 +23,6 @@
     --now-playing-subsection-animation-delay: calc(var(--now-playing-subsection-duration) / 2);
 
     --accuracy-line-x: 1260px;
-    --team-avatar-x: 11px;
-    --team-name-x: 169.688px;
-    --team-seed-x: 169.287px;
     --bottom-row-side-rectangle-1-x: 0px;
     --bottom-row-side-rectangle-2-x: 60px;
     --bottom-row-side-rectangle-3-x: 120px;
@@ -143,73 +140,8 @@ body { font-family: "Orlando Caps CG"; }
     left: var(--accuracy-line-x);
 }
 
-/* Team Avatars */
-.team-avatar {
-    --dimension: 137px;
-    border: 3px solid rgb(32, 32, 32);
-    position: absolute;
-    top: 886px;
-    width: var(--dimension);
-    height: var(--dimension);
-}
-.red-team-avatar { left: var(--team-avatar-x); }
-.blue-team-avatar { right: var(--team-avatar-x); }
-
-/* Team Names */
-.team-name {
-    font-size: 50px;
-    position: absolute;
-    top: 890px;
-    letter-spacing: -0.75px;
-}
-.red-team-name { 
-    color: var(--red-colour);
-    left: var(--team-name-x);
-}
-.blue-team-name { 
-    color: var(--blue-colour);
-    right: var(--team-name-x);
-}
-
-/* Team Seed */
-.team-seed {
-    font-size: 25px;
-    position: absolute;
-    top: 935.5px;
-    letter-spacing: -0.75px;
-}
-.red-team-seed {
-    color: var(--red-colour);
-    left: var(--team-seed-x)
-}
-.blue-team-seed {
-    color: var(--blue-colour);
-    right: var(--team-seed-x)
-}
-
-/* Team Star Container */
-.team-star-container {
-    position: absolute;
-    left: 170px;
-    top: 966px;
-    display: flex;
-    gap: 2px;
-    height: 58px;
-}
-.red-team-star-container { left: 170px; }
-.blue-team-star-container {
-    right: 170px;
-    flex-direction: row-reverse;
-}
-/* star Wrapper */
-.star-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 57px;
-    height: 58px;
-}
+/* Team Data */
+.team-data { top: 886px; }
 
 /* Bottom Middle Section */
 .bottom-middle-section {
