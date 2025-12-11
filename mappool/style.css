@@ -64,21 +64,17 @@ body { font-family: "Orlando Caps CG"; }
     left: 654px;
     top: 413px;
     z-index: 0;
+    width: 611px;
+    height: 75px;
 }
 .tiebreaker-pick-container::before {
     content: "";
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    padding: 3px;
-    background: linear-gradient(
-      -60deg,
-      rgba(19, 23, 182, 0.6),
-      rgba(171, 72, 128, 0.6)
-    );
-    -webkit-mask:
-      linear-gradient(white 0 0) content-box,
-      linear-gradient(white 0 0);
+    padding: 6px;
+    background: linear-gradient( -60deg, rgba(19, 23, 182, 0.6), rgba(171, 72, 128, 0.6) );
+    -webkit-mask: linear-gradient(white 0 0) content-box, linear-gradient(white 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     z-index: -1;
@@ -105,6 +101,7 @@ body { font-family: "Orlando Caps CG"; }
 .ban-container .inner-background { background-image: linear-gradient(90deg, rgb(79, 79, 79, 0.75), rgb(51, 51, 51, 0.75)); }
 .red-pick-container .inner-background { background-image: linear-gradient(90deg, rgb(191, 142, 176, 0.75), rgb(180, 105, 150, 0.75)); }
 .blue-pick-container .inner-background { background-image: linear-gradient(90deg, rgb(141, 142, 191, 0.75), rgb(106, 108, 180, 0.75)); }
+.tiebreaker-pick-container .inner-background { background-image: linear-gradient(90deg, rgba(171, 72, 128, 0.6), rgba(19, 23, 182, 0.6)); }
 
 /* Tile Identifier */
 .tile-identifier {
