@@ -3,10 +3,14 @@
     --blue-colour: rgb(73, 77, 174);
     --dark-gray: rgb(48, 48, 48);
     --light-gray: rgb(225, 225, 225);
+    --chat-title-gray: rgb(125, 125, 125);
 
     --team-avatar-x: 11px;
     --team-name-x: 169.688px;
     --team-seed-x: 169.287px;
+    --chat-display-title-height: 35px;
+    --chat-display-padding-left: 10px;
+    --chat-display-container-padding-top: 5px;
 }
 
 /* Font Family */
@@ -129,3 +133,46 @@
     from { opacity: 0.6; }
     to { opacity: 1; }
 }
+
+/* Chat Display */
+.chat-display {
+    background-color: var(--dark-gray);
+    overflow: hidden;
+}
+.chat-display-title {
+    position: absolute;
+    height: var(--chat-display-title-height);
+    background-color: var(--chat-title-gray);
+    color: white;
+    display: flex;
+    align-items: center;
+    font-size: 1.75em;
+    z-index: 1;
+}
+.chat-display-live-title-text {
+    opacity: 1;
+    transition: 200ms ease-in-out;
+}
+.chat-display-container {
+    position: absolute;
+    top: 0;
+    margin-top: 5px;
+    margin-left: var(--chat-display-padding-left);
+    width: calc(100% - var(--chat-display-padding-left) * 2);
+    height: calc(100% -  (var(--chat-display-container-padding-top) * 2));
+    color: var(--light-gray);
+    font-family: "Torus";
+    font-weight: 700;
+    font-size: 1.25em;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    transition: 200ms ease-in-out;
+}
+.unknown { color: yellow; }
+.left { color: rgb(255, 0, 0); }
+.right { color: rgb(0, 247, 255); }
+.bot { color: rgb(255, 136, 0); }

@@ -3,7 +3,6 @@
     --blue-colour: rgb(73, 77, 174);
     
     --background-light-gray: rgb(195, 196, 217);
-    --chat-title-gray: rgb(125, 125, 125);
     
     --side-rectangle-2-box-shadow-colour: rgba(73, 77, 174, 0.5);
     --side-rectangle-3-box-shadow-colour: rgba(41, 46, 188, 0.5);
@@ -29,9 +28,6 @@
     --bottom-row-side-rectangle-4-x: 180px;
     --playing-score-x: 478.5px;
     --bottom-middle-section-height: 154px;
-    --chat-display-title-height: 35px;
-    --chat-display-padding-left: 10px;
-    --chat-display-container-padding-top: 5px;
 }
 
 /* Whole Body */
@@ -226,50 +222,12 @@ body { font-family: "Orlando Caps CG"; }
 }
 
 /* Chat Display */
-.chat-display {
-    background-color: var(--dark-gray);
-    transition: 500ms ease-in-out;
-}
+.chat-display { transition: 500ms ease-in-out; }
 .chat-display-title {
-    position: absolute;
     width: calc(100% - var(--chat-display-padding-left));
-    height: var(--chat-display-title-height);
-    background-color: var(--chat-title-gray);
-    color: white;
     padding-left: var(--chat-display-padding-left);
-    display: flex;
-    align-items: center;
-    font-size: 1.75em;
-    z-index: 1;
     transition: 400ms ease-in-out;
 }
-.chat-display-live-title-text {
-    opacity: 1;
-    transition: 200ms ease-in-out;
-}
-.chat-display-container {
-    position: absolute;
-    top: 0;
-    margin-top: 5px;
-    margin-left: var(--chat-display-padding-left);
-    width: calc(100% - var(--chat-display-padding-left) * 2);
-    height: calc(100% -  (var(--chat-display-container-padding-top) * 2));
-    color: var(--light-gray);
-    font-family: "Torus";
-    font-weight: 700;
-    font-size: 1.25em;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    overflow-y: auto;
-    scroll-behavior: smooth;
-    transition: 200ms ease-in-out;
-}
-.unknown { color: yellow; }
-.left { color: rgb(255, 0, 0); }
-.right { color: rgb(0, 247, 255); }
-.bot { color: rgb(255, 136, 0); }
 
 /* Bottom Row Cosmetics */
 .bottom-row-side-rectangle {

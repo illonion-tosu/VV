@@ -144,3 +144,18 @@ body { font-family: "Orlando Caps CG"; }
 .red-pick-container .pick-tile-overlay { background-color: rgb(180, 105, 150, 0.75); }
 .blue-pick-container .pick-tile-overlay { background-color: hsla(234, 33%, 56%, 0.75); }
 .ban-tile-overlay {  background-color: rgba(48, 48, 48, 0.75); }
+
+/* Chat Display */
+.chat-display {
+    position: absolute;
+    left: 657px;
+    top: 185px;
+    width: 607px;
+    height: 208px;
+    border-radius: 35px;
+}
+.chat-display-title {
+    --padding-left: 25px;
+    width: calc(100% - var(--padding-left));
+    padding-left: var(--padding-left);
+}
