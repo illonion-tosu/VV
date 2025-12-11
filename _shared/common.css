@@ -114,3 +114,18 @@
     width: 57px;
     height: 58px;
 }
+
+/* Hand */
+.hand {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 162px;
+    width: 70px;
+    height: 167px;
+    animation: hand-animation 2s ease-in-out infinite alternate;
+}
+@keyframes hand-animation {
+    from { opacity: 0.6; }
+    to { opacity: 1; }
+}
