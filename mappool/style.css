@@ -1,3 +1,9 @@
+:root {
+    --choice-container-x: 18px;
+    --tile-info-x: 59px;
+    --song-metadata-y: 10.625px;
+}
+
 /* Whole Body */
 body { font-family: "Orlando Caps CG"; }
 .main { background-image: url("static/background.png") }
@@ -9,6 +15,17 @@ body { font-family: "Orlando Caps CG"; }
 .round-text {
     position: absolute;
     left: 50%;
+    top: 79px;
+    transform: translateX(-50%);
+    font-size: 33px;
+    color: var(--dark-gray);
+    text-align: center;
+}
+
+/* Tournament Name */
+.tournament-name {
+    position: absolute;
+    left: 50%;
     top: 21px;
     transform: translateX(-50%);
     font-size: 25px;
@@ -17,13 +34,116 @@ body { font-family: "Orlando Caps CG"; }
     line-height: 0.85;
 }
 
-.tournament-name {
+/* Red Choice Container */
+.choice-container {
     position: absolute;
-    left: 50%;
-    top: 16px;
-    transform: translateX(-50%);
-    font-size: 25px;
-    color: var(--dark-gray);
-    text-align: center;
-    line-height: 0.9;
+    top: 183px;
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+    height: 811px;
+    justify-content: center;;
 }
+.red-choice-container { left: var(--choice-container-x); }
+.blue-choice-container { right: var(--choice-container-x); }
+/* Tile Container */
+.tile-container {
+    --height: 69px;
+    position: relative;
+    border: 3px solid transparent;
+    width: 605px;
+    height: var(--height);
+    border-radius: calc(var(--height) / 2);
+    overflow: hidden;
+}
+.ban-container { border-color: rgba(51, 51, 51, 0.77); }
+.red-pick-container { border-color: rgba(171, 72, 128, 0.77); }
+.blue-pick-container { border-color: rgba(73, 77, 174, 0.77); }
+.tiebreaker-pick-container {
+    position: absolute;
+    left: 654px;
+    top: 413px;
+    z-index: 0;
+}
+.tiebreaker-pick-container::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 3px;
+    background: linear-gradient(
+      -60deg,
+      rgba(19, 23, 182, 0.6),
+      rgba(171, 72, 128, 0.6)
+    );
+    -webkit-mask:
+      linear-gradient(white 0 0) content-box,
+      linear-gradient(white 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    z-index: -1;
+}
+
+/* Tile Background */
+.tile-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: inherit;
+    height: inherit;
+    background: url("https://assets.ppy.sh/beatmaps/292301/covers/cover.jpg") center / cover;
+}
+
+/* Inner Background */
+.inner-background {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: inherit;
+    height: inherit;
+}
+.ban-container .inner-background { background-image: linear-gradient(90deg, rgb(79, 79, 79, 0.75), rgb(51, 51, 51, 0.75)); }
+.red-pick-container .inner-background { background-image: linear-gradient(90deg, rgb(191, 142, 176, 0.75), rgb(180, 105, 150, 0.75)); }
+.blue-pick-container .inner-background { background-image: linear-gradient(90deg, rgb(141, 142, 191, 0.75), rgb(106, 108, 180, 0.75)); }
+
+/* Tile Identifier */
+.tile-identifier {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: var(--tile-info-x);
+    font-size: 46px;
+    color: var(--light-gray);
+    opacity: 1;
+}
+/* Song Metadata */
+.song-metadata {
+    position: absolute;
+    left: var(--tile-info-x);
+    font-size: 20px;
+    color: var(--light-gray);
+    opacity: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overfloW: ellipsis;
+    width: 400px;
+}
+.artist-title { top: var(--song-metadata-y); }
+.mapped-by { bottom: var(--song-metadata-y); }
+
+/* Tile Overlay */
+.tile-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: inherit;
+    height: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 46px;
+    color: var(--light-gray);
+}
+.red-pick-container .pick-tile-overlay { background-color: rgb(180, 105, 150, 0.75); }
+.blue-pick-container .pick-tile-overlay { background-color: hsla(234, 33%, 56%, 0.75); }
+.ban-tile-overlay {  background-color: rgba(48, 48, 48, 0.75); }
