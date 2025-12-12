@@ -1,7 +1,8 @@
-import { loadBeatmaps, findBeatmap, loadTeams, findTeam } from "../_shared/core/data.js"
+import { loadBeatmaps, findBeatmap, loadTeams } from "../_shared/core/data.js"
 import { createTosuWsSocket } from "../_shared/core/websocket.js"
 import { delay } from "../_shared/core/utils.js"
 import CountUp from "../_shared/core/countUp.js"
+import { setTeamDisplays } from "../_shared/core/teams.js"
 
 // Round names
 const roundNameFrontEl = document.getElementById("round-name-front")
@@ -239,19 +240,6 @@ socket.onmessage = async event => {
         redAccuracyLineEl.style.width = `${(currentRedScore - 80) / 20 * 660}px`
         blueAccuracyLineEl.style.width = `${(currentBlueScore - 80) / 20 * 660}px`
     }
-}
-
-// Set Team Displays
-function setTeamDisplays(teamName, teamNameElement, avatarElement, seedNumberElement) {
-    teamNameElement.textContent = teamName
-
-    const team = findTeam(teamName)
-    if (team) {
-        // TOOD: Set actual team name
-        avatarElement.style.backgroundImage = `url("https://a.ppy.sh/2")`
-        seedNumberElement.textContent = team.seed
-    }
-    return teamName
 }
 
 // Get Stats
