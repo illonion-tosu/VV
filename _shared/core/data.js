@@ -1,6 +1,5 @@
 let allShowcaseBeatmaps = []
 let allBeatmaps = []
-let allTeams = []
 
 // Load showcase beatmaps
 export async function loadShowcaseBeatmaps() {
@@ -25,16 +24,4 @@ export async function loadBeatmaps() {
 // Find beatmap from Id
 export function findBeatmap(id) {
     return allBeatmaps.beatmaps.find(b => Number(b.beatmap_id) === Number(id))
-}
-
-// Load teams
-export async function loadTeams() {
-    const response = await axios.get("../_data/teams.json")
-    allTeams = response.data
-    return allTeams
-}
-
-// Find team
-export function findTeam(team) {
-    return allTeams.find(t => t.team_name.toLowerCase().trim() === team.toLowerCase().trim())
 }

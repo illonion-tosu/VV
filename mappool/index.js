@@ -1,7 +1,17 @@
-import { loadBeatmaps, findBeatmap, loadTeams } from "../_shared/core/data.js"
+import { loadBeatmaps, findBeatmap } from "../_shared/core/data.js"
+import { loadTeams, setTeamDisplays } from "../_shared/core/teams.js"
 import { createTosuWsSocket } from "../_shared/core/websocket.js"
 import { delay } from "../_shared/core/utils.js"
-import setTeamDisplays from "../_shared/core/teams.js"
+
+// Load beatmaps and players
+const roundTextEl = document.getElementById("round-text")
+let allBeatmaps = []
+let allTeams = []
+Promise.all([loadBeatmaps(), loadTeams()]).then(([beatmaps, teams]) => {
+    allTeams = teams
+    allBeatmaps = beatmaps
+    roundTextEl.innerText = allBeatmaps.roundName
+})
 
 // Team Information
 // Team Avatars
@@ -25,6 +35,7 @@ socket.onmessage = async event => {
     // Team
     if (redTeamName !== data.tourney.team.left) {
         redTeamName = setTeamDisplays(data.tourney.team.left, redTeamNameEl, redTeamAvatarEl, redTeamSeedNumberEl)
+        console.log(setTeamDisplays(data.tourney.team.left, redTeamNameEl, redTeamAvatarEl, redTeamSeedNumberEl))
     }
     if (blueTeamName !== data.tourney.team.right) {
         blueTeamName = setTeamDisplays(data.tourney.team.right, blueTeamNameEl, blueTeamAvatarEl, blueTeamSeedNumberEl)

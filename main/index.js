@@ -1,4 +1,5 @@
-import { loadBeatmaps, findBeatmap, loadTeams } from "../_shared/core/data.js"
+import { loadBeatmaps, findBeatmap } from "../_shared/core/data.js"
+import loadTeams from "../_shared/core/teams.js"
 import { createTosuWsSocket } from "../_shared/core/websocket.js"
 import { delay } from "../_shared/core/utils.js"
 import CountUp from "../_shared/core/countUp.js"
