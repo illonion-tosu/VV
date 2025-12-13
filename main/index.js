@@ -1,9 +1,9 @@
 import { loadBeatmaps, findBeatmap } from "../_shared/core/data.js"
-import loadTeams from "../_shared/core/teams.js"
 import { createTosuWsSocket } from "../_shared/core/websocket.js"
 import { delay } from "../_shared/core/utils.js"
 import CountUp from "../_shared/core/countUp.js"
-import { setTeamDisplays } from "../_shared/core/teams.js"
+import { loadTeams, setTeamDisplays } from "../_shared/core/teams.js"
+import { toggleStarContainers, renderStars } from "../_shared/core/stars.js"
 
 // Round names
 const roundNameFrontEl = document.getElementById("round-name-front")
@@ -270,3 +270,13 @@ function setLengthDisplay(seconds) {
 
     return `${minuteCount.toString()}:${secondCount.toString().padStart(2, "0")}`
 }
+
+// Team star containers
+const redTeamStarContainerEl = document.getElementById("red-team-star-container")
+const blueTeamStarContainerEl = document.getElementById("blue-team-star-container")
+
+// Stars
+setInterval(() => {
+    toggleStarContainers(redTeamStarContainerEl, blueTeamStarContainerEl)
+    renderStars(redTeamStarContainerEl, blueTeamStarContainerEl)
+}, 200)

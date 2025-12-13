@@ -159,3 +159,49 @@ body { font-family: "Orlando Caps CG"; }
     width: calc(100% - var(--padding-left));
     padding-left: var(--padding-left);
 }
+
+/* Sidebar */
+.sidebar {
+    position: absolute;
+    top: 0;
+    left: 1920px;
+    width: 250px;
+    height: 1080px;
+    background-color: var(--light-gray);
+    overfloW: hidden;
+}
+/* Sidebar H1s */
+.sidebar-section h1 {
+    text-align: center;
+    width: 100%;
+}
+/* Sidebar Button Container */
+.sidebar-button-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+/* Sidebar Button */
+.sidebar-button {
+    --height: 30px;
+    width: 110px;
+    height: var(--height);
+    margin: 5px;
+    border-radius: calc(var(--height) / 2);
+    border: 2px solid var(--dark-gray);
+    background-color: transparent;
+    font-size: 1em;
+    font-family: inherit;
+}
+.sidebar-button:active {
+    background-color: var(--dark-gray);
+    color: var(--light-gray);
+}
+/* Full Size Button */
+.full-size-button {
+    width: 230px;
+    color: var(--light-gray);
+}
+/* Toggle Button */
+.toggle-on { background-color: green; }
+.toggle-off { background-color: maroon; }

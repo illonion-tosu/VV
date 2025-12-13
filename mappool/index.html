@@ -28,7 +28,7 @@
             <div class="team-seed blue-team-seed">SEED: <span id="blue-team-seed-number">1</span></div>
 
             <!-- Stars -->
-            <div class="team-star-container red-team-star-container">
+            <div class="team-star-container red-team-star-container" id="red-team-star-container">
                 <div class="star-wrapper"><img src="../_shared/assets/stars/fill.png"></div>
                 <div class="star-wrapper"><img src="../_shared/assets/stars/fill.png"></div>
                 <div class="star-wrapper"><img src="../_shared/assets/stars/fill.png"></div>
@@ -37,7 +37,7 @@
                 <div class="star-wrapper"><img src="../_shared/assets/stars/fill.png"></div>
                 <div class="star-wrapper"><img src="../_shared/assets/stars/empty.png"></div>
             </div>
-            <div class="team-star-container blue-team-star-container">
+            <div class="team-star-container blue-team-star-container" id="blue-team-star-container">
                 <div class="star-wrapper"><img src="../_shared/assets/stars/fill.png"></div>
                 <div class="star-wrapper"><img src="../_shared/assets/stars/fill.png"></div>
                 <div class="star-wrapper"><img src="../_shared/assets/stars/fill.png"></div>
@@ -67,7 +67,6 @@
                     <div>RED BAN</div>
                 </div>
             </div>
-            <div class="tile-container ban-container"></div>
             <div class="tile-container red-pick-container">
                 <div class="tile-background"></div>
                 <div class="inner-background">
@@ -89,8 +88,6 @@
             </div>
             <div class="tile-container red-pick-container"></div>
             <div class="tile-container red-pick-container"></div>
-            <div class="tile-container red-pick-container"></div>
-            <div class="tile-container red-pick-container"></div>
             <div class="tile-container ban-container"></div>
         </div>
         <div class="choice-container blue-choice-container">
@@ -105,7 +102,6 @@
                     <div>BLUE BAN</div>
                 </div>
             </div>
-            <div class="tile-container ban-container"></div>
             <div class="tile-container blue-pick-container">
                 <div class="tile-background"></div>
                 <div class="inner-background">
@@ -125,8 +121,6 @@
                     <div class="tile-identifier">V8</div>
                 </div>
             </div>
-            <div class="tile-container blue-pick-container"></div>
-            <div class="tile-container blue-pick-container"></div>
             <div class="tile-container blue-pick-container"></div>
             <div class="tile-container blue-pick-container"></div>
             <div class="tile-container ban-container"></div>
@@ -156,6 +150,21 @@
 
         <!-- Noise -->
         <img class="noise" src="../_shared/assets/noise.png">
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Noise -->
+        <div class="sidebar-section">
+            <h1>Star Control</h1>
+            <div class="sidebar-button-container">
+                <button class="sidebar-button" id="set-star-red-plus">Red ++</button>
+                <button class="sidebar-button" id="set-star-red-minue">Red --</button>
+                <button class="sidebar-button" id="set-star-blue-plus">Blue ++</button>
+                <button class="sidebar-button" id="set-star-blue-minue">Blue --</button>
+                <button class="sidebar-button full-size-button toggle-on" id="toggle-stars-button">Toggle Stars: <span id="toggle-stars-on-off">ON</span></button>
+            </div>
+        </div>
     </div>
 
     <script src="index.js" type="module"></script>

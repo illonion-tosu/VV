@@ -23,6 +23,5 @@ export function setTeamDisplays(teamName, teamNameElement, avatarElement, seedNu
         seedNumberElement.textContent = team.seed
     }
 
-    console.log(teamName)
     return teamName
 }
