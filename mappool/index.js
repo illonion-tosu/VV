@@ -46,6 +46,16 @@ const blueTeamSeedNumberEl = document.getElementById("blue-team-seed-number")
 // Variables
 let redTeamName, blueTeamName
 
+// Set winner
+let ipcState
+let checkedWinner = true
+
+// Update Star Count Buttons
+const setStarRedPlusEl = document.getElementById("set-star-red-plus")
+const setStarRedMinueEl = document.getElementById("set-star-red-minue")
+const setStarBluePlusEl = document.getElementById("set-star-blue-plus")
+const setStarBlueMinueEl = document.getElementById("set-star-blue-minue")
+
 // Socket
 const socket = createTosuWsSocket()
 socket.onmessage = async event => {
@@ -59,6 +69,30 @@ socket.onmessage = async event => {
     if (blueTeamName !== data.tourney.team.right) {
         blueTeamName = setTeamDisplays(data.tourney.team.right, blueTeamNameEl, blueTeamAvatarEl, blueTeamSeedNumberEl)
     }
+
+    // IPC State
+    if (ipcState !== data.tourney.ipcState) {
+        ipcState = data.tourney.ipcState
+        if (ipcState !== 4) checkedWinner = false
+        else {
+            // Set winner
+            if (!checkedWinner) {
+                checkedWinner = true
+                let redScore = 0
+                let blueScore = 0
+                
+                const numberOfClients = data.tourney.clients.length
+                for (let i = 0; i < numberOfClients; i++) {
+                    const score = clients[i].play.accuracy
+                    if (i < numberOfClients / 2) redScore += score
+                    else blueScore += score
+                }
+
+                if (redScore > blueScore) setStarRedPlusEl.click()
+                else if (blueScore > redScore) setStarBluePlusEl.click()
+            }
+        }
+    }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -68,11 +102,6 @@ document.addEventListener("DOMContentLoaded", () => {
     toggleStarButtonEl.addEventListener("click", () => toggleStars(toggleStarsOnOffEl, toggleStarButtonEl, redTeamStarContainerEl, blueTeamStarContainerEl))
     document.cookie = `toggleStarContainers=${true}; path=/`
 
-    // Update Star Count Buttons
-    const setStarRedPlusEl = document.getElementById("set-star-red-plus")
-    const setStarRedMinueEl = document.getElementById("set-star-red-minue")
-    const setStarBluePlusEl = document.getElementById("set-star-blue-plus")
-    const setStarBlueMinueEl = document.getElementById("set-star-blue-minue")
     setStarRedPlusEl.addEventListener("click", () => updateStarCount("red", "plus", redTeamStarContainerEl, blueTeamStarContainerEl))
     setStarRedMinueEl.addEventListener("click", () => updateStarCount("red", "minus", redTeamStarContainerEl, blueTeamStarContainerEl))
     setStarBluePlusEl.addEventListener("click", () => updateStarCount("blue", "plus", redTeamStarContainerEl, blueTeamStarContainerEl))
