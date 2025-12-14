@@ -12,6 +12,12 @@ const blueTeamStarContainerEl = document.getElementById("blue-team-star-containe
 const roundTextEl = document.getElementById("round-text")
 let allBeatmaps = []
 let allTeams = []
+let banCount = 0
+
+// Choice Containers
+const redChoiceContainerEl = document.getElementById("red-choice-container")
+const blueChoiceContainerEl = document.getElementById("blue-choice-container")
+
 Promise.all([loadBeatmaps(), loadTeams()]).then(([beatmaps, teams]) => {
     allTeams = teams
     allBeatmaps = beatmaps
@@ -23,15 +29,57 @@ Promise.all([loadBeatmaps(), loadTeams()]).then(([beatmaps, teams]) => {
     switch (roundName) {
         case "ROUND OF 32": case "ROUND OF 16":
             setDefaultStarCount(9, redTeamStarContainerEl, blueTeamStarContainerEl)
+            banCount = 1
             break
         case "QUARTERFINALS": case "SEMIFINALS":
             setDefaultStarCount(11, redTeamStarContainerEl, blueTeamStarContainerEl)
+            banCount = 2
             break
         case "FINALS": case "GRAND FINALS":
             setDefaultStarCount(13, redTeamStarContainerEl, blueTeamStarContainerEl)
+            banCount = 2
             break
     }
+
+    // Create ban
+    for (let i = 0; i < banCount; i++) {
+        // Ban Container
+
+        redChoiceContainerEl.append(createBanTile())
+        blueChoiceContainerEl.append(createBanTile())
+    }
 })
+
+// Create Ban Tile
+function createBanTile() {
+    // Ban Container
+    const banContainer = document.createElement("div")
+    banContainer.classList.add("tile-container", "ban-container")
+
+    // Tile background
+    const tileBackground = document.createElement("div")
+    tileBackground.classList.add("tile-background")
+
+    // Inner background
+    const innerBackground = document.createElement("div")
+    innerBackground.classList.add("inner-background")
+    const artistTitle = document.createElement("div")
+    artistTitle.classList.add("song-metadata", "artist-title")
+    const mappedBy = document.createElement("div")
+    mappedBy.classList.add("song-metadata", "mapped-by")
+    const tileIdentifier = document.createElement("div")
+    tileIdentifier.classList.add("tile-identifier")
+    innerBackground.append(artistTitle, mappedBy, tileIdentifier)
+
+    // Ban Tile Overlay
+    const banTileOverlay = document.createElement("div")
+    banTileOverlay.classList.add("ban-tile-overlay", "tile-overlay")
+    const banText = document.createElement("div")
+    banTileOverlay.append(banText)
+
+    banContainer.append(tileBackground, innerBackground, banTileOverlay)
+    return banContainer
+}
 
 // Team Information
 // Team Avatars

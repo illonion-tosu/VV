@@ -85,9 +85,10 @@ body { font-family: "Orlando Caps CG"; }
     position: absolute;
     top: 0;
     left: 0;
-    width: inherit;
+    width: 0;
     height: inherit;
     background: url("https://assets.ppy.sh/beatmaps/292301/covers/cover.jpg") center / cover;
+    transition: 500ms ease-in-out;
 }
 
 /* Inner Background */
@@ -95,8 +96,10 @@ body { font-family: "Orlando Caps CG"; }
     position: relative;
     top: 0;
     left: 0;
-    width: inherit;
+    width: 0;
     height: inherit;
+    overflow: hidden;
+    transition: 500ms ease-in-out;
 }
 .ban-container .inner-background { background-image: linear-gradient(90deg, rgb(79, 79, 79, 0.75), rgb(51, 51, 51, 0.75)); }
 .red-pick-container .inner-background { background-image: linear-gradient(90deg, rgb(191, 142, 176, 0.75), rgb(180, 105, 150, 0.75)); }
@@ -119,11 +122,12 @@ body { font-family: "Orlando Caps CG"; }
     left: var(--tile-info-x);
     font-size: 20px;
     color: var(--light-gray);
-    opacity: 1;
+    opacity: 0;
     white-space: nowrap;
     overflow: hidden;
     text-overfloW: ellipsis;
     width: 400px;
+    transition: 500ms ease-in-out;
 }
 .artist-title { top: var(--song-metadata-y); }
 .mapped-by { bottom: var(--song-metadata-y); }
@@ -140,6 +144,8 @@ body { font-family: "Orlando Caps CG"; }
     align-items: center;
     font-size: 46px;
     color: var(--light-gray);
+    transition: 500ms ease-in-out;
+    opacity: 0;
 }
 .red-pick-container .pick-tile-overlay { background-color: rgb(180, 105, 150, 0.75); }
 .blue-pick-container .pick-tile-overlay { background-color: hsla(234, 33%, 56%, 0.75); }
