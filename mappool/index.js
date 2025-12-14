@@ -12,7 +12,7 @@ const blueTeamStarContainerEl = document.getElementById("blue-team-star-containe
 const roundTextEl = document.getElementById("round-text")
 let allBeatmaps = []
 let allTeams = []
-let banCount = 0
+let banCount = 0, bestOf = 0, firstTo = 0
 
 // Choice Containers
 const redChoiceContainerEl = document.getElementById("red-choice-container")
@@ -28,26 +28,39 @@ Promise.all([loadBeatmaps(), loadTeams()]).then(([beatmaps, teams]) => {
     // Set default star counts
     switch (roundName) {
         case "ROUND OF 32": case "ROUND OF 16":
-            setDefaultStarCount(9, redTeamStarContainerEl, blueTeamStarContainerEl)
+            bestOf = 9
             banCount = 1
             break
         case "QUARTERFINALS": case "SEMIFINALS":
-            setDefaultStarCount(11, redTeamStarContainerEl, blueTeamStarContainerEl)
+            bestOf = 11
             banCount = 2
             break
         case "FINALS": case "GRAND FINALS":
-            setDefaultStarCount(13, redTeamStarContainerEl, blueTeamStarContainerEl)
+            bestOf = 13
             banCount = 2
             break
     }
+    firstTo = Math.ceil(bestOf / 2)
+    setDefaultStarCount(bestOf, redTeamStarContainerEl, blueTeamStarContainerEl)
+
+    redChoiceContainerEl.innerHTML = ""
+    blueChoiceContainerEl.innerHTML = ""
 
     // Create ban
     for (let i = 0; i < banCount; i++) {
-        // Ban Container
-
         redChoiceContainerEl.append(createBanTile())
         blueChoiceContainerEl.append(createBanTile())
     }
+
+    // First To
+    for (let i = 0; i < firstTo - 1; i++) {
+        redChoiceContainerEl.append(createPickTile("red"))
+        blueChoiceContainerEl.append(createPickTile("blue"))
+    }
+
+    // Create ban
+    redChoiceContainerEl.append(createBanTile())
+    blueChoiceContainerEl.append(createBanTile())
 })
 
 // Create Ban Tile
@@ -79,6 +92,37 @@ function createBanTile() {
 
     banContainer.append(tileBackground, innerBackground, banTileOverlay)
     return banContainer
+}
+
+// Create Pick Tile
+function createPickTile(side) {
+    // Pick Container
+    const pickContainer = document.createElement("div")
+    pickContainer.classList.add("tile-container", `${side}-pick-container`)
+
+    // Tile background
+    const tileBackground = document.createElement("div")
+    tileBackground.classList.add("tile-background")
+
+    // Inner background
+    const innerBackground = document.createElement("div")
+    innerBackground.classList.add("inner-background")
+    const artistTitle = document.createElement("div")
+    artistTitle.classList.add("song-metadata", "artist-title")
+    const mappedBy = document.createElement("div")
+    mappedBy.classList.add("song-metadata", "mapped-by")
+    const tileIdentifier = document.createElement("div")
+    tileIdentifier.classList.add("tile-identifier")
+    innerBackground.append(artistTitle, mappedBy, tileIdentifier)
+
+    // Ban Tile Overlay
+    const pickTileOverlay = document.createElement("div")
+    pickTileOverlay.classList.add("pick-tile-overlay", "tile-overlay")
+    const banText = document.createElement("div")
+    pickTileOverlay.append(banText)
+
+    pickContainer.append(tileBackground, innerBackground, pickTileOverlay)
+    return pickContainer
 }
 
 // Team Information
