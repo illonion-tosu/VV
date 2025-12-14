@@ -72,7 +72,7 @@ body { font-family: "Orlando Caps CG"; }
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    padding: 6px;
+    padding: 5px;
     background: linear-gradient( -60deg, rgba(19, 23, 182, 0.6), rgba(171, 72, 128, 0.6) );
     -webkit-mask: linear-gradient(white 0 0) content-box, linear-gradient(white 0 0);
     -webkit-mask-composite: xor;
