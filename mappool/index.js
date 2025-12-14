@@ -48,27 +48,27 @@ Promise.all([loadBeatmaps(), loadTeams()]).then(([beatmaps, teams]) => {
 
     // Create ban
     for (let i = 0; i < banCount; i++) {
-        redChoiceContainerEl.append(createBanTile())
-        blueChoiceContainerEl.append(createBanTile())
+        redChoiceContainerEl.append(createTile("ban", ""))
+        blueChoiceContainerEl.append(createTile("ban", ""))
     }
 
     // First To
     for (let i = 0; i < firstTo - 1; i++) {
-        redChoiceContainerEl.append(createPickTile("red"))
-        blueChoiceContainerEl.append(createPickTile("blue"))
+        redChoiceContainerEl.append(createTile("pick", "red"))
+        blueChoiceContainerEl.append(createTile("pick", "blue"))
     }
 
     // Create ban
-    redChoiceContainerEl.append(createBanTile())
-    blueChoiceContainerEl.append(createBanTile())
+    redChoiceContainerEl.append(createTile("ban", ""))
+    blueChoiceContainerEl.append(createTile("ban", ""))
 })
 
-// Create Ban Tile
-function createBanTile() {
-    // Ban Container
-    const banContainer = document.createElement("div")
-    banContainer.classList.add("tile-container", "ban-container")
-
+// Create tile
+function createTile(choice, side) {
+    // Ban / Pick Container
+    const tileContainer = document.createElement("div")
+    tileContainer.classList.add("tile-container", `${choice === "ban" ? "ban" : `${side}-pick`}-container`)
+    
     // Tile background
     const tileBackground = document.createElement("div")
     tileBackground.classList.add("tile-background")
@@ -84,45 +84,15 @@ function createBanTile() {
     tileIdentifier.classList.add("tile-identifier")
     innerBackground.append(artistTitle, mappedBy, tileIdentifier)
 
-    // Ban Tile Overlay
-    const banTileOverlay = document.createElement("div")
-    banTileOverlay.classList.add("ban-tile-overlay", "tile-overlay")
-    const banText = document.createElement("div")
-    banTileOverlay.append(banText)
+    // Tile overlay
+    const tileOverlay = document.createElement("div")
+    tileOverlay.classList.add(`${choice}-tile-overlay`, "tile-overlay")
+    const overlayText = document.createElement("div")
+    tileOverlay.append(overlayText)
 
-    banContainer.append(tileBackground, innerBackground, banTileOverlay)
-    return banContainer
-}
-
-// Create Pick Tile
-function createPickTile(side) {
-    // Pick Container
-    const pickContainer = document.createElement("div")
-    pickContainer.classList.add("tile-container", `${side}-pick-container`)
-
-    // Tile background
-    const tileBackground = document.createElement("div")
-    tileBackground.classList.add("tile-background")
-
-    // Inner background
-    const innerBackground = document.createElement("div")
-    innerBackground.classList.add("inner-background")
-    const artistTitle = document.createElement("div")
-    artistTitle.classList.add("song-metadata", "artist-title")
-    const mappedBy = document.createElement("div")
-    mappedBy.classList.add("song-metadata", "mapped-by")
-    const tileIdentifier = document.createElement("div")
-    tileIdentifier.classList.add("tile-identifier")
-    innerBackground.append(artistTitle, mappedBy, tileIdentifier)
-
-    // Ban Tile Overlay
-    const pickTileOverlay = document.createElement("div")
-    pickTileOverlay.classList.add("pick-tile-overlay", "tile-overlay")
-    const banText = document.createElement("div")
-    pickTileOverlay.append(banText)
-
-    pickContainer.append(tileBackground, innerBackground, pickTileOverlay)
-    return pickContainer
+    // Append everything and return
+    tileContainer.append(tileBackground, innerBackground, tileOverlay)
+    return tileContainer
 }
 
 // Team Information
