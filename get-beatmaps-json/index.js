@@ -35,7 +35,7 @@ async function getBeatmaps() {
         responseJson[0] = {
             // "approved": responseJson[0].approved,
             // "approved_date": responseJson[0].approved_date,
-            // "artist": responseJson[0].artist,
+            "artist": responseJson[0].artist,
             // "artist_unicode": responseJson[0].artist_unicode,
             // "audio_unavailable": responseJson[0].audio_unavailable,
             "beatmap_id": responseJson[0].beatmap_id,
@@ -44,7 +44,7 @@ async function getBeatmaps() {
             // "count_normal": responseJson[0].count_normal,
             // "count_slider": responseJson[0].count_slider,
             // "count_spinner": responseJson[0].count_spinner,
-            // "creator": responseJson[0].creator,
+            "creator": responseJson[0].creator,
             // "creator_id": responseJson[0].creator_id,
             // "diff_aim": responseJson[0].diff_aim,
             "diff_approach": responseJson[0].diff_approach,
@@ -70,10 +70,10 @@ async function getBeatmaps() {
             // "storyboard": responseJson[0].storyboard,
             // "submit_date": responseJson[0].submit_date,
             // "tags": responseJson[0].tags,
-            // "title": responseJson[0].title,
+            "title": responseJson[0].title,
             // "title_unicode": responseJson[0].title_unicode,
             "total_length": responseJson[0].total_length,
-            // "version": responseJson[0].version,
+            "version": responseJson[0].version,
             // "video": responseJson[0].video
         }
 

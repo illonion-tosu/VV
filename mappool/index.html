@@ -42,7 +42,7 @@
         <div class="choice-container red-choice-container" id="red-choice-container"></div>
         <div class="choice-container blue-choice-container" id="blue-choice-container"></div>
         <!-- Tiebreaker Tile -->
-        <div class="tile-container tiebreaker-pick-container">
+        <div class="tile-container tiebreaker-pick-container" id="tiebreaker-pick-container">
             <div class="tile-background"></div>
             <div class="inner-background">
                 <div class="song-metadata artist-title"></div>
@@ -69,7 +69,7 @@
 
     <!-- Sidebar -->
     <div class="sidebar">
-        <!-- Noise -->
+        <!-- Star Control -->
         <div class="sidebar-section">
             <h1>Star Control</h1>
             <div class="sidebar-button-container">
@@ -79,6 +79,18 @@
                 <button class="sidebar-button" id="set-star-blue-minue">Blue --</button>
                 <button class="sidebar-button full-size-button toggle-on" id="toggle-stars-button">Toggle Stars: <span id="toggle-stars-on-off">ON</span></button>
             </div>
+        </div>
+        <!-- Choose Maps -->
+        <div class="sidebar-section" id="mappool-management">
+            <h1>Mappool Management</h1>
+            <div class="sidebar-text">
+                Left Click (LC) = Red Pick<br>
+                Right Click (RC) = Blue Pick<br>
+                CTRL + LC = Red Ban<br>
+                CTRL + RC = Blue Ban<br>
+                Shift + Click = TB Pick
+            </div><br>
+            <div class="sidebar-button-container" id="mappool-management-maps"></div>
         </div>
     </div>
 

@@ -17,6 +17,10 @@ let banCount = 0, bestOf = 0, firstTo = 0
 // Choice Containers
 const redChoiceContainerEl = document.getElementById("red-choice-container")
 const blueChoiceContainerEl = document.getElementById("blue-choice-container")
+const tiebreakerPickContainerEl = document.getElementById("tiebreaker-pick-container")
+
+// Mappool Management
+const mappoolManagementMapsEl = document.getElementById("mappool-management-maps")
 
 Promise.all([loadBeatmaps(), loadTeams()]).then(([beatmaps, teams]) => {
     allTeams = teams
@@ -61,6 +65,17 @@ Promise.all([loadBeatmaps(), loadTeams()]).then(([beatmaps, teams]) => {
     // Create ban
     redChoiceContainerEl.append(createTile("ban", ""))
     blueChoiceContainerEl.append(createTile("ban", ""))
+
+    // Create map pick buttons
+    for (let i = 0; i < allBeatmaps.beatmaps.length; i++) {
+        const button = document.createElement("button")
+        button.addEventListener("mousedown", mapClickEvent)
+        button.addEventListener("contextmenu", function(event) {event.preventDefault()})
+        button.classList.add("sidebar-button")
+        button.dataset.id = allBeatmaps.beatmaps[i].beatmap_id
+        button.textContent = allBeatmaps.beatmaps[i].identifier
+        mappoolManagementMapsEl.append(button)
+    }
 })
 
 // Create tile
@@ -93,6 +108,75 @@ function createTile(choice, side) {
     // Append everything and return
     tileContainer.append(tileBackground, innerBackground, tileOverlay)
     return tileContainer
+}
+
+// Map Click Event
+async function mapClickEvent(event) {
+    // Find map
+    const currentMapId = this.dataset.id
+    const currentMap = findBeatmap(currentMapId)
+    if (!currentMap) return
+
+    // Team
+    let team
+    if (event.button === 0) team = "red"
+    else if (event.button === 2) team = "blue"
+    if (!team) return
+
+    // Action
+    let action = "pick"
+    if (event.ctrlKey) action = "ban"
+    if (event.shiftKey) action = "tbPick"
+
+    // Check if map exists in bans
+    const mapCheck = !!(
+        redChoiceContainerEl.querySelector(`[data-id="${currentMapId}"]`) ||
+        blueChoiceContainerEl.querySelector(`[data-id="${currentMapId}"]`)
+    )
+
+    if (mapCheck) return
+
+    // Find element
+    let currentElement
+    if (action === "tbPick") {
+        currentElement = tiebreakerPickContainerEl
+    } else {
+        // Find side container and then ban the map
+        const side = team === "red" ? redChoiceContainerEl : blueChoiceContainerEl
+        const containers = side.querySelectorAll(action === "ban" ? ".ban-container" : `.${team}-pick-container`)
+
+        // See if there is an element that is empty
+        for (const container of containers) {
+            // Skip if this container already has a data-id
+            if (container.dataset.id) continue
+            currentElement = container
+            break
+        }
+        if (!currentElement) return
+    }
+
+    // Set details for element
+    console.log(currentElement)
+    currentElement.setAttribute("data-id", currentMapId)
+    currentElement.children[0].style.backgroundImage = `url("https://assets.ppy.sh/beatmaps/${currentMap.beatmapset_id}/covers/cover.jpg")`
+    currentElement.children[1].children[0].textContent = `${currentMap.artist} - ${currentMap.title}`
+    currentElement.children[1].children[1].textContent = currentMap.creator
+    currentElement.children[1].children[2].textContent = currentMap.identifier
+
+    // Start doing animations
+    currentElement.children[0].style.width = "100%"
+    currentElement.children[1].style.width = "100%"
+    await delay(500)
+    currentElement.children[1].children[0].style.opacity = 1
+    currentElement.children[1].children[1].style.opacity = 1
+    currentElement.children[1].children[2].style.opacity = 1
+
+    // Ban
+    if (action === "ban") {
+        await delay(500)
+        currentElement.children[2].children[0].textContent = `${team.toUpperCase()} BAN`
+        currentElement.children[2].style.opacity = 1
+    }
 }
 
 // Team Information
