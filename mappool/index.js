@@ -1,5 +1,5 @@
 import { updateChat } from "../_shared/core/chat.js"
-import { loadBeatmaps, findBeatmap } from "../_shared/core/data.js"
+import { loadBeatmaps, findBeatmap } from "../_shared/core/beatmaps.js"
 import { loadTeams, setTeamDisplays } from "../_shared/core/teams.js"
 import { createTosuWsSocket } from "../_shared/core/websocket.js"
 import { delay } from "../_shared/core/utils.js"
