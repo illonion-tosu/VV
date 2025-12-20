@@ -1,3 +1,4 @@
+import { updateChat } from "../_shared/core/chat.js"
 import { loadBeatmaps, findBeatmap } from "../_shared/core/data.js"
 import { createTosuWsSocket } from "../_shared/core/websocket.js"
 import { delay } from "../_shared/core/utils.js"
@@ -92,28 +93,7 @@ socket.onmessage = async event => {
 
     // This is also mostly taken from Victim Crasher: https://github.com/VictimCrasher/static/tree/master/WaveTournament
     if (chatLen !== data.tourney.chat.length) {
-        (chatLen === 0 || chatLen > data.tourney.chat.length) ? (chatDisplayContainerEl.innerHTML = "", chatLen = 0) : null
-        const fragment = document.createDocumentFragment()
-
-        for (let i = chatLen; i < data.tourney.chat.length; i++) {
-            // Message container
-            const messageContainer = document.createElement("div")
-
-            // Name
-            const messageName = document.createElement("span")
-            messageName.classList.add(data.tourney.chat[i].team)
-            messageName.textContent = `${data.tourney.chat[i].name}: `
-
-            // Message
-            const messageContent = document.createElement("span")
-            messageContent.textContent = data.tourney.chat[i].message
-
-            messageContainer.append(messageName, messageContent)
-            fragment.append(messageContainer)
-        }
-
-        chatDisplayContainerEl.append(fragment)
-        chatLen = data.tourney.chat.length
+        chatLen = updateChat(data.tourney.chat, chatLen, chatDisplayContainerEl)
     }
 
     // Score visibility
