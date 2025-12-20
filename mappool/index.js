@@ -440,6 +440,32 @@ async function sidebarSetBanAction() {
     await setBanDetails(currentBanContainer, currentBanTeam)
 }
 
+// Sidebar Remove Ban ACtion
+async function sidebarRemoveBanAction() {
+    if (!currentBanContainer) return
+
+    // Remove ban element
+    currentBanContainer.children[2].style.opacity = 0
+    await delay(500)
+
+    // Start doing animations
+    currentBanContainer.children[1].children[0].style.opacity = 0
+    currentBanContainer.children[1].children[1].style.opacity = 0
+    currentBanContainer.children[1].children[2].style.opacity = 0
+    await delay(500)
+    currentBanContainer.children[0].style.width = "0%"
+    currentBanContainer.children[1].style.width = "0%"
+    await delay(500)
+
+    // Remove ban
+    currentBanContainer.removeAttribute("data-id")
+    currentBanContainer.children[2].children[0].textContent = ""
+    currentBanContainer.children[0].style.backgroundImage = "unset"
+    currentBanContainer.children[1].children[0].textContent = ""
+    currentBanContainer.children[1].children[1].textContent = ""
+    currentBanContainer.children[1].children[2].textContent = ""
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     // Toggle stars button
     const toggleStarButtonEl = document.getElementById("toggle-stars-button")
