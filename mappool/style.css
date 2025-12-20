@@ -3,6 +3,7 @@
     --tile-info-x: 59px;
     --song-metadata-y: 10.625px;
     --mappool-chat-display-padding-left: 25px;
+    --tile-container-height: 69px;
 }
 
 /* Whole Body */
@@ -49,12 +50,11 @@ body { font-family: "Orlando Caps CG"; }
 .blue-choice-container { right: var(--choice-container-x); }
 /* Tile Container */
 .tile-container {
-    --height: 69px;
     position: relative;
     border: 3px solid transparent;
     width: 605px;
-    height: var(--height);
-    border-radius: calc(var(--height) / 2);
+    height: var(--tile-container-height);
+    border-radius: calc(var(--tile-container-height) / 2);
     overflow: hidden;
 }
 .ban-container { border-color: rgba(51, 51, 51, 0.77); }
@@ -90,7 +90,7 @@ body { font-family: "Orlando Caps CG"; }
     width: 0;
     height: inherit;
     background: url("https://assets.ppy.sh/beatmaps/292301/covers/cover.jpg") center / cover;
-    border-radius: calc(69px / 2);
+    border-radius: calc(var(--tile-container-height) / 2);
     transition: 500ms ease-in-out;
 }
 
@@ -102,7 +102,7 @@ body { font-family: "Orlando Caps CG"; }
     width: 0;
     height: inherit;
     overflow: hidden;
-    border-radius: calc(69px / 2);
+    border-radius: calc(var(--tile-container-height) / 2);
     transition: 500ms ease-in-out;
 }
 .ban-container .inner-background { background-image: linear-gradient(90deg, rgb(79, 79, 79, 0.75), rgb(51, 51, 51, 0.75)); }
