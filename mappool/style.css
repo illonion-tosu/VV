@@ -177,11 +177,27 @@ body { font-family: "Orlando Caps CG"; }
     position: absolute;
     top: 0;
     left: 1920px;
-    width: 250px;
+    width: 500px;
     height: 1080px;
     background-color: var(--light-gray);
     overfloW: hidden;
 }
+/* Sidebar Column */
+.column {
+    position: absolute;
+    top: 0;
+    width: 250px;
+}
+.column-1 { left: 0; }
+.column-2 { left: 250px; }
+/* Sidebar Divider */
+.divider {
+    position: absolute;
+    width: 2px;
+    height: 1080px;
+    background-color: var(--dark-gray);
+}
+.divider-1 { left: 249px; }
 /* Sidebar Section */
 .sidebar-section {
     padding-bottom: 10px;
@@ -193,13 +209,18 @@ body { font-family: "Orlando Caps CG"; }
     width: 100%;
     font-size: 1.4em;
 }
+.sidebar-section h2 {
+    text-align: center;
+    width: 100%;
+    font-size: 1.15em;
+}
 /* Sidebar Text */
 .sidebar-text {
     text-align: center;
     font-family: "Torus";
     font-size: 1.2em;
 }
-.font-family-orlando-caps-gg { font-family: unset; }
+.font-family-orlando-caps-cg { font-family: unset; }
 /* Sidebar Button Container */
 .sidebar-button-container {
     display: flex;
@@ -227,9 +248,53 @@ body { font-family: "Orlando Caps CG"; }
     width: 230px;
     color: var(--light-gray);
 }
+/* Apply Changes Button */
+.apply-changes-button {
+    margin-top: 30px;
+    margin-left: 10px;
+    height: 50px;
+}
+.apply-changes-button:active {
+    background-color: var(--dark-gray);
+    color: var(--light-gray);
+}
 /* Toggle Button */
 .toggle-on { background-color: green; }
 .toggle-off { background-color: maroon; }
+
+/* Ban Pick Management Select*/
+.ban-pick-management-select {
+    width: 250px;
+    text-align: center;
+    color: var(--dark-gray);
+    background-color: transparent;
+    border: none;
+    font-family: "Torus";
+    font-weight: 700;
+    font-size: 1.25em;
+}
+.ban-pick-management-select::-webkit-scrollbar { display: none; }
+/* Which Map */
+.which-map-select {
+    width: 250px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+.which-side-button {
+    --height: 25px;
+    height: var(--height);
+    line-height: var(--height);
+    font-size: 1.25em;
+    font-family: "Torus";
+    color: var(--secondary-colour);
+    background-color: transparent;
+    border: none;
+}
+.which-map-button {
+    width: 70px;
+}
 
 /* Noise */
 .noise { opacity: 0.65; }

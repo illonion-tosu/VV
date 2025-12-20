@@ -4,10 +4,10 @@ export function updateChat(
     chatLength,
     chatDisplayContainerEl
 ) {
-    (chatLength === 0 || chatLen > chatData.length) ? (chatDisplayContainerEl.innerHTML = "", chatLength = 0) : null
+    (chatLength === 0 || chatLength > chatData.length) ? (chatDisplayContainerEl.innerHTML = "", chatLength = 0) : null
     const fragment = document.createDocumentFragment()
 
-    for (let i = chatLen; i < chatData.length; i++) {
+    for (let i = chatLength; i < chatData.length; i++) {
         // Message container
         const messageContainer = document.createElement("div")
 

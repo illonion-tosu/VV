@@ -156,27 +156,36 @@ async function mapClickEvent(event) {
         if (!currentElement) return
     }
 
-    // Set details for element
-    currentElement.setAttribute("data-id", currentMapId)
-    currentElement.children[0].style.backgroundImage = `url("https://assets.ppy.sh/beatmaps/${currentMap.beatmapset_id}/covers/cover.jpg")`
-    currentElement.children[1].children[0].textContent = `${currentMap.artist} - ${currentMap.title}`
-    currentElement.children[1].children[1].textContent = currentMap.creator
-    currentElement.children[1].children[2].textContent = currentMap.identifier
-
-    // Start doing animations
-    currentElement.children[0].style.width = "100%"
-    currentElement.children[1].style.width = "100%"
-    await delay(500)
-    currentElement.children[1].children[0].style.opacity = 1
-    currentElement.children[1].children[1].style.opacity = 1
-    currentElement.children[1].children[2].style.opacity = 1
+    // Set details for element + animation
+    await setTileDetails(currentElement, currentMap)
 
     // Ban
-    if (action === "ban") {
-        await delay(500)
-        currentElement.children[2].children[0].textContent = `${team.toUpperCase()} BAN`
-        currentElement.children[2].style.opacity = 1
-    }
+    if (action === "ban") { await setBanDetails(currentElement, team) }
+}
+
+// Set tile details
+async function setTileDetails(element, currentMap) {
+    // Set details for element
+    element.setAttribute("data-id", currentMap.beatmap_id)
+    element.children[0].style.backgroundImage = `url("https://assets.ppy.sh/beatmaps/${currentMap.beatmapset_id}/covers/cover.jpg")`
+    element.children[1].children[0].textContent = `${currentMap.artist} - ${currentMap.title}`
+    element.children[1].children[1].textContent = currentMap.creator
+    element.children[1].children[2].textContent = currentMap.identifier
+
+    // Start doing animations
+    element.children[0].style.width = "100%"
+    element.children[1].style.width = "100%"
+    await delay(500)
+    element.children[1].children[0].style.opacity = 1
+    element.children[1].children[1].style.opacity = 1
+    element.children[1].children[2].style.opacity = 1
+}
+
+// Set ban details
+async function setBanDetails(element, team) {
+    await delay(500)
+    element.children[2].children[0].textContent = `${team.toUpperCase()} BAN`
+    element.children[2].style.opacity = 1
 }
 
 // Team Information
@@ -298,6 +307,139 @@ function setAutopicker(picker) {
     document.cookie = `currentPicker=${currentPicker}; path=/`
 }
 
+// Set Ban Pick Action
+const banPickManagementEl = document.getElementById("ban-pick-management")
+const banPickManagementSelectActionEl = document.getElementById("ban-pick-management-select-action")
+let currentAction
+function setBanPickAction() {
+    currentAction = banPickManagementSelectActionEl.value
+    currentBanContainer = undefined
+    currentBanTeam = undefined
+    sidebarButtonBeatmap = undefined
+
+    while (banPickManagementEl.childElementCount > 3) {
+        banPickManagementEl.lastElementChild.remove()
+    }
+
+    // Bans
+    if (currentAction === "setBan" || currentAction === "removeBan") {
+        makeSidebarText("Which Team?")
+
+        // Which Team Select
+        const whichTeamSelect = document.createElement("select")
+        whichTeamSelect.setAttribute("id", "which-ban-select")
+        whichTeamSelect.classList.add("ban-pick-management-select")
+        whichTeamSelect.setAttribute("size", 6)
+        whichTeamSelect.addEventListener("change", event => setBanContainer(event.currentTarget))
+
+        // Which Team Select Options
+        whichTeamSelect.append(makeTeamBanOption("red", 1), makeTeamBanOption("blue", 1), makeTeamBanOption("red", 2), makeTeamBanOption("blue", 2))
+        if (bestOf !== 9) {
+            whichTeamSelect.append(makeTeamBanOption("red", 3), makeTeamBanOption("blue", 3))
+            whichTeamSelect.setAttribute("size", 6)
+        }
+        banPickManagementEl.append(whichTeamSelect)
+
+        if (currentAction === "setBan") makeTeamAddMaps()
+    }
+
+    // Picks
+    if (currentAction === "setPick" || currentAction === "removePick") {
+        makeSidebarText("Which Pick?")
+    }
+
+    // Winners
+    if (currentAction === "setWinner" || currentAction === "removeWinner") {
+        makeSidebarText("Which Pick?")
+    }
+
+    // Apply changes button
+    const applyChangesButton = document.createElement("button")
+    applyChangesButton.classList.add("sidebar-button", "full-size-button", "apply-changes-button")
+    applyChangesButton.style.color = "var(--dark-gray)"
+    applyChangesButton.textContent = "Apply Changes"
+
+    // Apply changes clicks
+    switch (currentAction) {
+        case "setBan": applyChangesButton.addEventListener("click", sidebarSetBanAction); break;
+        case "removeBan": applyChangesButton.addEventListener("click", sidebarRemoveBanAction); break;
+        // case "setPick": applyChangesButton.addEventListener("click", sidebarSetPickAction); break;
+        // case "removePick": applyChangesButton.addEventListener("click", sidebarRemovePickAction); break;
+        // case "setWinner": applyChangesButton.addEventListener("click", sidebarSetWinnerAction); break;
+        // case "removeWinner": applyChangesButton.addEventListener("click", sidebarRemoveWinnerAction); break;
+    }
+    banPickManagementEl.append(applyChangesButton)
+}
+
+// Make sidebar text
+function makeSidebarText(text) {
+    const h2 = document.createElement("h2")
+    h2.textContent = text
+    banPickManagementEl.append(h2)
+}
+
+// Team Ban Options
+function makeTeamBanOption(team, number) {
+    const selectOptionBan = document.createElement("option")
+    selectOptionBan.setAttribute("value", `${team}|${number}|ban`)
+    selectOptionBan.innerText = `${team.substring(0, 1).toUpperCase()}${team.substring(1)} Ban ${number}`
+    return selectOptionBan
+}
+
+// Add Ban Container
+let currentBanContainer, currentBanTeam
+function setBanContainer(element) {
+    const currentBanElements = element.value.split("|")
+    currentBanTeam = currentBanElements[0]
+    if (currentBanTeam === "red") currentBanContainer = redChoiceContainerEl.querySelectorAll(".ban-container")[currentBanElements[1] - 1]
+    else currentBanContainer = blueChoiceContainerEl.querySelectorAll(".ban-container")[currentBanElements[1] - 1]
+}
+
+// Team Add maps
+function makeTeamAddMaps() {
+    // Which map?
+    makeSidebarText("Which Map?")
+
+    // Which Map Select
+    const whichMapSelect = document.createElement("div")
+    whichMapSelect.classList.add("which-map-select")
+    const beatmaps = allBeatmaps.beatmaps
+    for (let i = 0; i < beatmaps.length; i++) {
+        // Which Map Button
+        const whichMapButton = document.createElement("button")
+        whichMapButton.classList.add("which-side-button", "which-map-button")
+        whichMapButton.innerText = `${beatmaps[i].identifier}`
+        whichMapButton.addEventListener("click", event => setSidebarBeatmap(event.currentTarget))
+        whichMapButton.dataset.id = beatmaps[i].beatmap_id
+        whichMapSelect.append(whichMapButton)
+    }
+    banPickManagementEl.append(whichMapSelect)
+}
+
+// Set sidebar beatmap
+const whichMapButtons = document.getElementsByClassName("which-map-button")
+let sidebarButtonBeatmap
+function setSidebarBeatmap(element) {
+    sidebarButtonBeatmap = element.dataset.id
+    for (let i = 0; i < whichMapButtons.length; i++) {
+        whichMapButtons[i].style.backgroundColor = "transparent"
+    }
+    element.style.backgroundColor = "#CECECE"
+}
+
+async function sidebarSetBanAction() {
+    if (!currentBanContainer) return
+
+    // Get map
+    if (!sidebarButtonBeatmap) return
+    const currentMap = findBeatmap(sidebarButtonBeatmap)
+    if (!currentMap) return
+
+    // Set details for element + animation
+    await setTileDetails(currentBanContainer, currentMap)
+    await setBanDetails(currentBanContainer, currentBanTeam)
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     // Toggle stars button
     const toggleStarButtonEl = document.getElementById("toggle-stars-button")
@@ -323,4 +465,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.cookie = `currentPicker="red"; path=/`
     nextAutopickRedEl.addEventListener("click", () => setAutopicker("red"))
     nextAutopickBlueEl.addEventListener("click",() => setAutopicker("blue"))
+
+    // Ban Pick Management
+    banPickManagementSelectActionEl.addEventListener("click", setBanPickAction)
 })
