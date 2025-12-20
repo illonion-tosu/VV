@@ -156,7 +156,6 @@ async function mapClickEvent(event) {
     }
 
     // Set details for element
-    console.log(currentElement)
     currentElement.setAttribute("data-id", currentMapId)
     currentElement.children[0].style.backgroundImage = `url("https://assets.ppy.sh/beatmaps/${currentMap.beatmapset_id}/covers/cover.jpg")`
     currentElement.children[1].children[0].textContent = `${currentMap.artist} - ${currentMap.title}`
@@ -198,9 +197,20 @@ let checkedWinner = true
 
 // Update Star Count Buttons
 const setStarRedPlusEl = document.getElementById("set-star-red-plus")
-const setStarRedMinueEl = document.getElementById("set-star-red-minue")
+const setStarRedMinusEl = document.getElementById("set-star-red-minus")
 const setStarBluePlusEl = document.getElementById("set-star-blue-plus")
-const setStarBlueMinueEl = document.getElementById("set-star-blue-minue")
+const setStarBlueMinusEl = document.getElementById("set-star-blue-minus")
+
+// Now Playing Information
+let mapId, mapChecksum
+
+/* Next Autopick */
+const nextAutopickNextEl = document.getElementById("next-autopick-text")
+const nextAutopickRedEl = document.getElementById("next-autopick-red")
+const nextAutopickBlueEl = document.getElementById("next-autopick-blue")
+const toggleAutopickButtonEl = document.getElementById("toggle-autopick-button")
+const toggleAutopickOnOffEl = document.getElementById("toggle-autopick-on-off")
+let isAutopickOn = false, currentPicker = "red"
 
 // Socket
 const socket = createTosuWsSocket()
@@ -239,6 +249,43 @@ socket.onmessage = async event => {
             }
         }
     }
+
+    // Set beatmap information
+    if ((mapId !== data.beatmap.id || mapChecksum !== data.beatmap.checksum) && allBeatmaps) {
+        mapId = data.beatmap.id
+        mapChecksum = data.beatmap.checksum
+
+        console.log("hello")
+
+        // Find element
+        const element = mappoolManagementMapsEl.querySelector(`[data-id="${mapId}"]`)
+
+        console.log(element, isAutopickOn)
+
+        // Click Event
+        if (isAutopickOn && (!element.hasAttribute("data-is-autopicked") || element.getAttribute("data-is-autopicked") !== "true")) {
+            console.log(isAutopickOn)
+            // Check if autopicked already
+            const event = new MouseEvent('mousedown', {
+                bubbles: true,
+                cancelable: true,
+                view: window,
+                button: (currentPicker === "red")? 0 : 2
+            })
+            element.dispatchEvent(event)
+            element.setAttribute("data-is-autopicked", "true")
+
+            if (currentPicker === "red") setAutopicker("blue")
+            else if (currentPicker === "blue") setAutopicker("red")
+        }
+    }
+}
+
+// Set Autopicker
+function setAutopicker(picker) {
+    currentPicker = picker
+    nextAutopickNextEl.textContent = currentPicker
+    document.cookie = `currentPicker=${currentPicker}; path=/`
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -248,8 +295,22 @@ document.addEventListener("DOMContentLoaded", () => {
     toggleStarButtonEl.addEventListener("click", () => toggleStars(toggleStarsOnOffEl, toggleStarButtonEl, redTeamStarContainerEl, blueTeamStarContainerEl))
     document.cookie = `toggleStarContainers=${true}; path=/`
 
+    // Update star count buttons
     setStarRedPlusEl.addEventListener("click", () => updateStarCount("red", "plus", redTeamStarContainerEl, blueTeamStarContainerEl))
-    setStarRedMinueEl.addEventListener("click", () => updateStarCount("red", "minus", redTeamStarContainerEl, blueTeamStarContainerEl))
+    setStarRedMinusEl.addEventListener("click", () => updateStarCount("red", "minus", redTeamStarContainerEl, blueTeamStarContainerEl))
     setStarBluePlusEl.addEventListener("click", () => updateStarCount("blue", "plus", redTeamStarContainerEl, blueTeamStarContainerEl))
-    setStarBlueMinueEl.addEventListener("click", () => updateStarCount("blue", "minus", redTeamStarContainerEl, blueTeamStarContainerEl))
+    setStarBlueMinusEl.addEventListener("click", () => updateStarCount("blue", "minus", redTeamStarContainerEl, blueTeamStarContainerEl))
+
+    // Toggle Autopick button
+    toggleAutopickButtonEl.addEventListener("click", function() {
+        isAutopickOn = !isAutopickOn
+        toggleAutopickOnOffEl.textContent = isAutopickOn ? "ON" : "OFF"
+        toggleAutopickButtonEl.classList.toggle("toggle-on", isAutopickOn)
+        toggleAutopickButtonEl.classList.toggle("toggle-off", !isAutopickOn)
+    })
+
+    // Set Autopicker Buttons
+    document.cookie = `currentPicker="red"; path=/`
+    nextAutopickRedEl.addEventListener("click", () => setAutopicker("red"))
+    nextAutopickBlueEl.addEventListener("click",() => setAutopicker("blue"))
 })

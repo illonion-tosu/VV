@@ -187,7 +187,7 @@ body { font-family: "Orlando Caps CG"; }
 .sidebar-section h1 {
     text-align: center;
     width: 100%;
-    font-size: 1.5em;
+    font-size: 1.4em;
 }
 /* Sidebar Text */
 .sidebar-text {
@@ -195,6 +195,7 @@ body { font-family: "Orlando Caps CG"; }
     font-family: "Torus";
     font-size: 1.2em;
 }
+.font-family-orlando-caps-gg { font-family: unset; }
 /* Sidebar Button Container */
 .sidebar-button-container {
     display: flex;
