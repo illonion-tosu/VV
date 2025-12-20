@@ -2,6 +2,7 @@
     --choice-container-x: 18px;
     --tile-info-x: 59px;
     --song-metadata-y: 10.625px;
+    --mappool-chat-display-padding-left: 25px;
 }
 
 /* Whole Body */
@@ -163,9 +164,12 @@ body { font-family: "Orlando Caps CG"; }
     border-radius: 35px;
 }
 .chat-display-title {
-    --padding-left: 25px;
-    width: calc(100% - var(--padding-left));
-    padding-left: var(--padding-left);
+    width: calc(100% - var(--mappool-chat-display-padding-left));
+    padding-left: var(--mappool-chat-display-padding-left);
+}
+.chat-display-container {
+    margin-left: var(--mappool-chat-display-padding-left);
+    width: calc(100% - var(--mappool-chat-display-padding-left) * 2);
 }
 
 /* Sidebar */
