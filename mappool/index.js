@@ -269,12 +269,8 @@ socket.onmessage = async event => {
         mapId = data.beatmap.id
         mapChecksum = data.beatmap.checksum
 
-        console.log("hello")
-
         // Find element
         const element = mappoolManagementMapsEl.querySelector(`[data-id="${mapId}"]`)
-
-        console.log(element, isAutopickOn)
 
         // Click Event
         if (isAutopickOn && (!element.hasAttribute("data-is-autopicked") || element.getAttribute("data-is-autopicked") !== "true")) {
@@ -314,6 +310,7 @@ let currentAction
 function setBanPickAction() {
     currentAction = banPickManagementSelectActionEl.value
     currentBanContainer = undefined
+    currentPickTeam = undefined
     currentBanTeam = undefined
     sidebarButtonBeatmap = undefined
 
@@ -362,6 +359,31 @@ function setBanPickAction() {
     // Winners
     if (currentAction === "setWinner" || currentAction === "removeWinner") {
         makeSidebarText("Which Pick?")
+
+        // Which pick?
+        const whichPickSelect = document.createElement("div")
+        whichPickSelect.classList.add("which-map-select")
+
+        // Which Map Select
+        makeTeamPickButton("red", whichPickSelect)
+        makeTeamPickButton("blue", whichPickSelect)
+        banPickManagementEl.append(whichPickSelect)
+
+        // Which Team Select
+        if (currentAction === "setWinner") {
+            // Which team?
+            makeSidebarText("Which Team Won?")
+
+            // Which Team Select
+            const whichTeamSelect = document.createElement("select")
+            whichTeamSelect.setAttribute("id", "which-team-select")
+            whichTeamSelect.classList.add("ban-pick-management-select")
+            whichTeamSelect.setAttribute("size", 2)
+
+            // Which Team Select Options
+            whichTeamSelect.append(makeTeamSelectOption("red"), makeTeamSelectOption("blue"))
+            banPickManagementEl.append(whichTeamSelect)
+        }
     }
 
     // Apply changes button
@@ -376,8 +398,8 @@ function setBanPickAction() {
         case "removeBan": applyChangesButton.addEventListener("click", sidebarRemoveBanAction); break;
         case "setPick": applyChangesButton.addEventListener("click", sidebarSetPickAction); break;
         case "removePick": applyChangesButton.addEventListener("click", sidebarRemovePickAction); break;
-        // case "setWinner": applyChangesButton.addEventListener("click", sidebarSetWinnerAction); break;
-        // case "removeWinner": applyChangesButton.addEventListener("click", sidebarRemoveWinnerAction); break;
+        case "setWinner": applyChangesButton.addEventListener("click", sidebarSetWinnerAction); break;
+        case "removeWinner": applyChangesButton.addEventListener("click", sidebarRemoveWinnerAction); break;
     }
     banPickManagementEl.append(applyChangesButton)
 }
@@ -395,6 +417,14 @@ function makeTeamBanOption(team, number) {
     selectOptionBan.setAttribute("value", `${team}|${number}|ban`)
     selectOptionBan.innerText = `${team.substring(0, 1).toUpperCase()}${team.substring(1)} Ban ${number}`
     return selectOptionBan
+}
+
+// Team Select Options
+function makeTeamSelectOption(team) {
+    const selectOptionTeam = document.createElement("option")
+    selectOptionTeam.setAttribute("value", team)
+    selectOptionTeam.innerText = `${team.substring(0, 1).toUpperCase()}${team.substring(1)}`
+    return selectOptionTeam
 }
 
 // Team Pick Button
@@ -527,6 +557,24 @@ async function sidebareRemoveBanPickAction(element) {
 // Sidebar Remove Ban / Pick Action functions
 function sidebarRemoveBanAction() { sidebareRemoveBanPickAction(currentBanContainer) }
 function sidebarRemovePickAction() { sidebareRemoveBanPickAction(currentPickContainer) }
+
+// Sidebar Set Winner Action
+function sidebarSetWinnerAction() {
+    if (!currentPickContainer) return
+
+    // Team Select Value
+    const teamSelectValue = document.getElementById("which-team-select").value
+    currentPickContainer.children[2].style.opacity = 1
+    currentPickContainer.children[2].children[0].textContent = `${teamSelectValue} wins`
+}
+
+// Sidebar Remove Winner Action
+function sidebarRemoveWinnerAction() {
+    if (!currentPickContainer) return
+
+    currentPickContainer.children[2].style.opacity = 1
+    currentPickContainer.children[2].children[0].textContent = ""
+}
 
 document.addEventListener("DOMContentLoaded", () => {
     // Toggle stars button

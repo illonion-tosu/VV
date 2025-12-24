@@ -47,7 +47,7 @@ body { font-family: "Orlando Caps CG"; }
     justify-content: center;;
 }
 .red-choice-container { left: var(--choice-container-x); }
-.blue-choice-container { right: var(--choice-container-x); }
+.blue-choice-container { right: var(--choice-container-x); } 
 /* Tile Container */
 .tile-container {
     position: relative;
@@ -294,9 +294,7 @@ body { font-family: "Orlando Caps CG"; }
     background-color: transparent;
     border: none;
 }
-.which-map-button {
-    width: 70px;
-}
+.which-map-button { width: 70px; }
 
 /* Noise */
 .noise { opacity: 0.65; }
