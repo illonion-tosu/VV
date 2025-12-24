@@ -340,8 +340,8 @@ function setBanPickAction() {
         if (currentAction === "setBan") makeTeamAddMaps()
     }
 
-    // Picks
-    if (currentAction === "setPick" || currentAction === "removePick") {
+    // Picks / Winner
+    if (currentAction === "setPick" || currentAction === "removePick" || currentAction === "setWinner" || currentAction === "removeWinner") {
         makeSidebarText("Which Pick?")
 
         // Which pick?
@@ -353,23 +353,10 @@ function setBanPickAction() {
         makeTeamPickButton("blue", whichPickSelect)
         banPickManagementEl.append(whichPickSelect)
 
+        // Set Pick
         if (currentAction === "setPick") makeTeamAddMaps()
-    }
 
-    // Winners
-    if (currentAction === "setWinner" || currentAction === "removeWinner") {
-        makeSidebarText("Which Pick?")
-
-        // Which pick?
-        const whichPickSelect = document.createElement("div")
-        whichPickSelect.classList.add("which-map-select")
-
-        // Which Map Select
-        makeTeamPickButton("red", whichPickSelect)
-        makeTeamPickButton("blue", whichPickSelect)
-        banPickManagementEl.append(whichPickSelect)
-
-        // Which Team Select
+        // Set Winner
         if (currentAction === "setWinner") {
             // Which team?
             makeSidebarText("Which Team Won?")
