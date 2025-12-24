@@ -346,6 +346,17 @@ function setBanPickAction() {
     // Picks
     if (currentAction === "setPick" || currentAction === "removePick") {
         makeSidebarText("Which Pick?")
+
+        // Which pick?
+        const whichPickSelect = document.createElement("div")
+        whichPickSelect.classList.add("which-map-select")
+
+        // Which Map Select
+        makeTeamPickButton("red", whichPickSelect)
+        makeTeamPickButton("blue", whichPickSelect)
+        banPickManagementEl.append(whichPickSelect)
+
+        if (currentAction === "setPick") makeTeamAddMaps()
     }
 
     // Winners
@@ -363,8 +374,8 @@ function setBanPickAction() {
     switch (currentAction) {
         case "setBan": applyChangesButton.addEventListener("click", sidebarSetBanAction); break;
         case "removeBan": applyChangesButton.addEventListener("click", sidebarRemoveBanAction); break;
-        // case "setPick": applyChangesButton.addEventListener("click", sidebarSetPickAction); break;
-        // case "removePick": applyChangesButton.addEventListener("click", sidebarRemovePickAction); break;
+        case "setPick": applyChangesButton.addEventListener("click", sidebarSetPickAction); break;
+        case "removePick": applyChangesButton.addEventListener("click", sidebarRemovePickAction); break;
         // case "setWinner": applyChangesButton.addEventListener("click", sidebarSetWinnerAction); break;
         // case "removeWinner": applyChangesButton.addEventListener("click", sidebarRemoveWinnerAction); break;
     }
@@ -386,6 +397,38 @@ function makeTeamBanOption(team, number) {
     return selectOptionBan
 }
 
+// Team Pick Button
+function makeTeamPickButton(side, whichPickSelect) {
+    for (let i = 1; i < firstTo; i++) {
+        // Which Map Button
+        const whichPickButton = document.createElement("button")
+        whichPickButton.classList.add("which-side-button", "which-pick-button")
+        whichPickButton.innerText = `${side.substring(0, 1).toUpperCase()}${side.substring(1)} Pick ${i}`
+        whichPickButton.addEventListener("click", event => setSidebarPick(event.currentTarget))
+        whichPickButton.dataset.side = side
+        whichPickButton.dataset.pickNumber = i
+        whichPickSelect.append(whichPickButton)
+    }
+}
+
+// Selected Option BG Colour
+const selectedBGColour = "#CECECE"
+
+// Set sidebar pick
+const whichPickButtons = document.getElementsByClassName("which-pick-button")
+let sidebarButtonPickSide, sidebarButtonPickNumber
+function setSidebarPick(element) {
+    sidebarButtonPickSide = element.dataset.side
+    sidebarButtonPickNumber = element.dataset.pickNumber
+
+    for (let i = 0; i < whichPickButtons.length; i++) {
+        whichPickButtons[i].style.backgroundColor = "transparent"
+    }
+
+    element.style.backgroundColor = selectedBGColour
+    setPickContainer(element)
+}
+
 // Add Ban Container
 let currentBanContainer, currentBanTeam
 function setBanContainer(element) {
@@ -393,6 +436,15 @@ function setBanContainer(element) {
     currentBanTeam = currentBanElements[0]
     if (currentBanTeam === "red") currentBanContainer = redChoiceContainerEl.querySelectorAll(".ban-container")[currentBanElements[1] - 1]
     else currentBanContainer = blueChoiceContainerEl.querySelectorAll(".ban-container")[currentBanElements[1] - 1]
+}
+
+// Set Piock Container
+let currentPickContainer, currentPickTeam
+function setPickContainer(element) {
+    const currentPickElement = element
+    currentPickTeam = currentPickElement.dataset.side
+    if (currentPickTeam === "red") currentPickContainer = redChoiceContainerEl.querySelectorAll(".red-pick-container")[Number(currentPickElement.dataset.pickNumber) - 1]
+    else currentPickContainer = blueChoiceContainerEl.querySelectorAll(".blue-pick-container")[Number(currentPickElement.dataset.pickNumber) - 1]
 }
 
 // Team Add maps
@@ -424,11 +476,12 @@ function setSidebarBeatmap(element) {
     for (let i = 0; i < whichMapButtons.length; i++) {
         whichMapButtons[i].style.backgroundColor = "transparent"
     }
-    element.style.backgroundColor = "#CECECE"
+    element.style.backgroundColor = selectedBGColour
 }
 
-async function sidebarSetBanAction() {
-    if (!currentBanContainer) return
+// Sidebar Set Ban Pick ACtion
+async function sidebarSetBanPickAction(element) {
+    if (!element) return
 
     // Get map
     if (!sidebarButtonBeatmap) return
@@ -436,35 +489,44 @@ async function sidebarSetBanAction() {
     if (!currentMap) return
 
     // Set details for element + animation
-    await setTileDetails(currentBanContainer, currentMap)
+    await setTileDetails(element, currentMap)
+}
+// Sidebar Set Ban Action
+async function sidebarSetBanAction() {
+    if (!currentBanContainer) return
+    sidebarSetBanPickAction(currentBanContainer)
     await setBanDetails(currentBanContainer, currentBanTeam)
 }
+function sidebarSetPickAction() { sidebarSetBanPickAction(currentPickContainer) }
 
-// Sidebar Remove Ban ACtion
-async function sidebarRemoveBanAction() {
-    if (!currentBanContainer) return
+// Sidebare Remove Ban Pick Action
+async function sidebareRemoveBanPickAction(element) {
+    if (!element) return
 
     // Remove ban element
-    currentBanContainer.children[2].style.opacity = 0
+    element.children[2].style.opacity = 0
     await delay(500)
 
     // Start doing animations
-    currentBanContainer.children[1].children[0].style.opacity = 0
-    currentBanContainer.children[1].children[1].style.opacity = 0
-    currentBanContainer.children[1].children[2].style.opacity = 0
+    element.children[1].children[0].style.opacity = 0
+    element.children[1].children[1].style.opacity = 0
+    element.children[1].children[2].style.opacity = 0
     await delay(500)
-    currentBanContainer.children[0].style.width = "0%"
-    currentBanContainer.children[1].style.width = "0%"
+    element.children[0].style.width = "0%"
+    element.children[1].style.width = "0%"
     await delay(500)
 
     // Remove ban
-    currentBanContainer.removeAttribute("data-id")
-    currentBanContainer.children[2].children[0].textContent = ""
-    currentBanContainer.children[0].style.backgroundImage = "unset"
-    currentBanContainer.children[1].children[0].textContent = ""
-    currentBanContainer.children[1].children[1].textContent = ""
-    currentBanContainer.children[1].children[2].textContent = ""
+    element.removeAttribute("data-id")
+    element.children[2].children[0].textContent = ""
+    element.children[0].style.backgroundImage = "unset"
+    element.children[1].children[0].textContent = ""
+    element.children[1].children[1].textContent = ""
+    element.children[1].children[2].textContent = ""
 }
+// Sidebar Remove Ban / Pick Action functions
+function sidebarRemoveBanAction() { sidebareRemoveBanPickAction(currentBanContainer) }
+function sidebarRemovePickAction() { sidebareRemoveBanPickAction(currentPickContainer) }
 
 document.addEventListener("DOMContentLoaded", () => {
     // Toggle stars button
