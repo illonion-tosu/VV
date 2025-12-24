@@ -351,6 +351,7 @@ function setBanPickAction() {
         // Which Map Select
         makeTeamPickButton("red", whichPickSelect)
         makeTeamPickButton("blue", whichPickSelect)
+        whichTeamButtonCreate("TB", 1, "TB", whichPickSelect)
         banPickManagementEl.append(whichPickSelect)
 
         // Set Pick
@@ -418,14 +419,19 @@ function makeTeamSelectOption(team) {
 function makeTeamPickButton(side, whichPickSelect) {
     for (let i = 1; i < firstTo; i++) {
         // Which Map Button
-        const whichPickButton = document.createElement("button")
-        whichPickButton.classList.add("which-side-button", "which-pick-button")
-        whichPickButton.innerText = `${side.substring(0, 1).toUpperCase()}${side.substring(1)} Pick ${i}`
-        whichPickButton.addEventListener("click", event => setSidebarPick(event.currentTarget))
-        whichPickButton.dataset.side = side
-        whichPickButton.dataset.pickNumber = i
-        whichPickSelect.append(whichPickButton)
+        whichTeamButtonCreate(`${side.substring(0, 1).toUpperCase()}${side.substring(1)}`, i, side, whichPickSelect)
     }
+}
+
+// Which Pick Button Create
+function whichTeamButtonCreate(text, i, side, whichPickSelect) {
+    const whichPickButton = document.createElement("button")
+    whichPickButton.classList.add("which-side-button", "which-pick-button")
+    whichPickButton.innerText = `${text} Pick ${i}`
+    whichPickButton.addEventListener("click", event => setSidebarPick(event.currentTarget))
+    whichPickButton.dataset.side = side
+    whichPickButton.dataset.pickNumber = i
+    whichPickSelect.append(whichPickButton)
 }
 
 // Selected Option BG Colour
@@ -461,7 +467,8 @@ function setPickContainer(element) {
     const currentPickElement = element
     currentPickTeam = currentPickElement.dataset.side
     if (currentPickTeam === "red") currentPickContainer = redChoiceContainerEl.querySelectorAll(".red-pick-container")[Number(currentPickElement.dataset.pickNumber) - 1]
-    else currentPickContainer = blueChoiceContainerEl.querySelectorAll(".blue-pick-container")[Number(currentPickElement.dataset.pickNumber) - 1]
+    else if (currentPickTeam === "blue") currentPickContainer = blueChoiceContainerEl.querySelectorAll(".blue-pick-container")[Number(currentPickElement.dataset.pickNumber) - 1]
+    else if (currentPickTeam === "TB") currentPickContainer = tiebreakerPickContainerEl
 }
 
 // Team Add maps
