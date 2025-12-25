@@ -112,6 +112,7 @@ function createTile(choice, side) {
 }
 
 // Map Click Event
+let currentTile
 async function mapClickEvent(event) {
     // Find map
     const currentMapId = this.dataset.id
@@ -161,6 +162,7 @@ async function mapClickEvent(event) {
 
     // Ban
     if (action === "ban") { await setBanDetails(currentElement, team) }
+    else { currentTile = currentElement }
 }
 
 // Set tile details
@@ -251,6 +253,7 @@ socket.onmessage = async event => {
                 let redScore = 0
                 let blueScore = 0
                 
+                // Set scores
                 const numberOfClients = data.tourney.clients.length
                 for (let i = 0; i < numberOfClients; i++) {
                     const score = clients[i].play.accuracy
@@ -258,8 +261,19 @@ socket.onmessage = async event => {
                     else blueScore += score
                 }
 
-                if (redScore > blueScore) setStarRedPlusEl.click()
-                else if (blueScore > redScore) setStarBluePlusEl.click()
+                // Set winner
+                let winnerTileText
+                if (redScore > blueScore) {
+                    setStarRedPlusEl.click()
+                    winnerTileText = "RED WIN"
+                } else if (blueScore > redScore) {
+                    setStarBluePlusEl.click()
+                    winnerTileText = "BLUE WIN"
+                }
+
+                // Set winner tile
+                currentTile.children[2].style.opacity = 1
+                currentTile.children[2].children[0].textContent = winnerTileText
             }
         }
     }
