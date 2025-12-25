@@ -106,6 +106,14 @@ function createTile(choice, side) {
     const overlayText = document.createElement("div")
     tileOverlay.append(overlayText)
 
+    // Styles for BO9
+    if (bestOf === 9) {
+        tileContainer.style.height = "103px"
+        tileContainer.style.borderRadius = "52px"
+        artistTitle.style.top = "27.625px"
+        mappedBy.style.bottom = "27.625px"
+    }
+
     // Append everything and return
     tileContainer.append(tileBackground, innerBackground, tileOverlay)
     return tileContainer
