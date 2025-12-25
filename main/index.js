@@ -263,5 +263,11 @@ setInterval(() => {
 
     // Set styling for the outline
     const currentPicker = getCookie("currentPicker")
-    nowPlayingBorderEl.style.borderColor = `var(--${currentPicker}-colour)`
+    if (currentPicker === "none") {
+        nowPlayingBorderEl.style.opacity = 0   
+    } else {
+        nowPlayingBorderEl.style.opacity = 1
+        nowPlayingBorderEl.style.borderColor = `var(--${currentPicker}-colour)`
+    }
+    
 }, 200)

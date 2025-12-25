@@ -172,7 +172,7 @@ async function mapClickEvent(event) {
     if (action === "ban") { await setBanDetails(currentElement, team) }
     else {
         currentTile = currentElement
-        document.cookie = `currentPicker=${team}; path=/`
+        updateCurrentPicker(team)
     }
 }
 
@@ -312,6 +312,8 @@ socket.onmessage = async event => {
 
             if (currentPicker === "red") setAutopicker("blue")
             else if (currentPicker === "blue") setAutopicker("red")
+        } else {
+            updateCurrentPicker("none")
         }
     }
 
@@ -594,6 +596,16 @@ function sidebarRemoveWinnerAction() {
     currentPickContainer.children[2].children[0].textContent = ""
 }
 
+// Setting current picker
+const currentPickerTextEl = document.getElementById("current-picker-text")
+const currentPickerRedEl = document.getElementById("current-picker-red")
+const currentPickerBlueEl = document.getElementById("current-picker-blue")
+const currentPickerNoneEl = document.getElementById("current-picker-none")
+function updateCurrentPicker(side) {
+    currentPickerTextEl.textContent = side
+    document.cookie = `currentPicker=${side}; path=/`
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     // Toggle stars button
     const toggleStarButtonEl = document.getElementById("toggle-stars-button")
@@ -616,10 +628,15 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 
     // Set Autopicker Buttons
-    document.cookie = `currentPicker="red"; path=/`
     nextAutopickRedEl.addEventListener("click", () => setAutopicker("red"))
     nextAutopickBlueEl.addEventListener("click",() => setAutopicker("blue"))
 
     // Ban Pick Management
     banPickManagementSelectActionEl.addEventListener("click", setBanPickAction)
+
+    // Current Picker
+    currentPickerRedEl.addEventListener("click", () => updateCurrentPicker("red"))
+    currentPickerBlueEl.addEventListener("click", () => updateCurrentPicker("blue"))
+    currentPickerNoneEl.addEventListener("click", () => updateCurrentPicker("none"))
+    currentPickerNoneEl.click()
 })
