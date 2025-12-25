@@ -93,7 +93,7 @@ socket.onmessage = async event => {
 
     // This is also mostly taken from Victim Crasher: https://github.com/VictimCrasher/static/tree/master/WaveTournament
     if (chatLen !== data.tourney.chat.length) {
-        chatLen = updateChat(data.tourney.chat, chatLen, chatDisplayContainerEl)
+        chatLen = updateChat(data.tourney, chatLen, chatDisplayContainerEl, false, "")
     }
 
     // Score visibility
@@ -151,7 +151,6 @@ socket.onmessage = async event => {
         updateStats = findBeatmap(beatmapId)
         if (updateStats) {
             const currentMap = updateStats
-            console.log("undefined")
             const stats = getStats(Number(currentMap.difficultyrating), Number(currentMap.diff_approach),
                 Number(currentMap.diff_size), Number(currentMap.diff_overall), Number(currentMap.diff_drain),
                 Number(currentMap.bpm), Number(currentMap.total_length), currentMap.mod

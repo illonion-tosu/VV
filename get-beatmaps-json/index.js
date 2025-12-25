@@ -1,12 +1,5 @@
 import { delay } from "../_shared/core/utils.js"
-
-// Load osu! api
-let osuApi
-async function getApi() {
-    const response = await fetch("../_data/osu-api.json")
-    const responseJson = await response.json()
-    osuApi = responseJson.api
-}
+import { initialiseOsuApi, getOsuApi } from "../_shared/core/apis.js"
 
 let allBeatmapsJson = []
 let fullJson = []
@@ -26,7 +19,7 @@ async function getBeatmaps() {
         if (allBeatmaps[i].mod.includes("DT")) modNumber = 64
         
         // Get API response
-        const response = await fetch(`https://api.codetabs.com/v1/proxy?quest=` + encodeURIComponent(`https://osu.ppy.sh/api/get_beatmaps?k=${osuApi}&b=${allBeatmaps[i].beatmap_id}&mods=${modNumber}`))
+        const response = await fetch(`https://api.codetabs.com/v1/proxy?quest=` + encodeURIComponent(`https://osu.ppy.sh/api/get_beatmaps?k=${getOsuApi()}&b=${allBeatmaps[i].beatmap_id}&mods=${modNumber}`))
         await delay(1000)
         let responseJson = await response.json()
 
@@ -99,7 +92,7 @@ async function getBeatmaps() {
 
 async function initialise() {
     buttonEl.disabled = true
-    await getApi()
+    await initialiseOsuApi()
     await getBeatmaps()
     buttonEl.disabled = false
 }

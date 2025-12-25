@@ -1,9 +1,11 @@
-import { updateChat } from "../_shared/core/chat.js"
+import { initialiseLogsApi, getLogsApi } from "../_shared/core/apis.js"
 import { loadBeatmaps, findBeatmap } from "../_shared/core/beatmaps.js"
-import { loadTeams, setTeamDisplays } from "../_shared/core/teams.js"
-import { createTosuWsSocket } from "../_shared/core/websocket.js"
-import { delay } from "../_shared/core/utils.js"
+import { updateChat } from "../_shared/core/chat.js"
+import { sendLog } from "../_shared/core/logs.js"
 import { toggleStars, setDefaultStarCount, updateStarCount, isStarOn } from "../_shared/core/stars.js"
+import { loadTeams, setTeamDisplays } from "../_shared/core/teams.js"
+import { delay } from "../_shared/core/utils.js"
+import { createTosuWsSocket } from "../_shared/core/websocket.js"
 
 // Team star containers
 const redTeamStarContainerEl = document.getElementById("red-team-star-container")
@@ -23,7 +25,7 @@ const tiebreakerPickContainerEl = document.getElementById("tiebreaker-pick-conta
 // Mappool Management
 const mappoolManagementMapsEl = document.getElementById("mappool-management-maps")
 
-Promise.all([loadBeatmaps(), loadTeams()]).then(([beatmaps, teams]) => {
+Promise.all([loadBeatmaps(), loadTeams(), initialiseLogsApi()]).then(([beatmaps, teams]) => {
     allTeams = teams
     allBeatmaps = beatmaps
 
@@ -237,7 +239,7 @@ let isAutopickOn = false, currentPicker = "red"
 
 // Chat Display
 const chatDisplayContainerEl = document.getElementById("chat-display-container")
-let chatLen
+let chatLen = 0
 
 // Socket
 const socket = createTosuWsSocket()
@@ -301,7 +303,6 @@ socket.onmessage = async event => {
 
         // Click Event
         if (isAutopickOn && (!element.hasAttribute("data-is-autopicked") || element.getAttribute("data-is-autopicked") !== "true")) {
-            console.log(isAutopickOn)
             // Check if autopicked already
             const event = new MouseEvent('mousedown', {
                 bubbles: true,
@@ -321,12 +322,16 @@ socket.onmessage = async event => {
 
     // This is also mostly taken from Victim Crasher: https://github.com/VictimCrasher/static/tree/master/WaveTournament
     if (chatLen !== data.tourney.chat.length) {
-        chatLen = updateChat(data.tourney.chat, chatLen, chatDisplayContainerEl)
+        chatLen = updateChat(data.tourney, chatLen, chatDisplayContainerEl, true, getLogsApi())
     }
 
     // Log Data
     const logData = {
         tournament: "VV",
+        team: {
+            left: redTeamName,
+            right: blueTeamName
+        },
         isStarOn: isStarOn(),
         ipcState: ipcState,
         checkedWinner: checkedWinner,
@@ -364,6 +369,8 @@ socket.onmessage = async event => {
     scoresRight = Math.round(scoresRight / (numberOfClients / 2))
     logData.accInfo.team.left = scoresLeft
     logData.accInfo.team.right = scoresRight
+
+    sendLog(logData, "log", getLogsApi())
 }
 
 // Set Autopicker
