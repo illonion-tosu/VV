@@ -170,7 +170,10 @@ async function mapClickEvent(event) {
 
     // Ban
     if (action === "ban") { await setBanDetails(currentElement, team) }
-    else { currentTile = currentElement }
+    else {
+        currentTile = currentElement
+        document.cookie = `currentPicker=${team}; path=/`
+    }
 }
 
 // Set tile details
@@ -322,7 +325,6 @@ socket.onmessage = async event => {
 function setAutopicker(picker) {
     currentPicker = picker
     nextAutopickNextEl.textContent = currentPicker
-    document.cookie = `currentPicker=${currentPicker}; path=/`
 }
 
 // Set Ban Pick Action

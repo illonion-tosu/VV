@@ -1,7 +1,7 @@
 import { updateChat } from "../_shared/core/chat.js"
 import { loadBeatmaps, findBeatmap } from "../_shared/core/beatmaps.js"
 import { createTosuWsSocket } from "../_shared/core/websocket.js"
-import { delay } from "../_shared/core/utils.js"
+import { delay, getCookie } from "../_shared/core/utils.js"
 import CountUp from "../_shared/core/countUp.js"
 import { loadTeams, setTeamDisplays } from "../_shared/core/teams.js"
 import { toggleStarContainers, renderStars } from "../_shared/core/stars.js"
@@ -257,6 +257,11 @@ const blueTeamStarContainerEl = document.getElementById("blue-team-star-containe
 
 // Stars
 setInterval(() => {
+    // Toggle and render stars
     toggleStarContainers(redTeamStarContainerEl, blueTeamStarContainerEl)
     renderStars(redTeamStarContainerEl, blueTeamStarContainerEl)
+
+    // Set styling for the outline
+    const currentPicker = getCookie("currentPicker")
+    nowPlayingBorderEl.style.borderColor = `var(--${currentPicker}-colour)`
 }, 200)
