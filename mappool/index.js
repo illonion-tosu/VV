@@ -3,7 +3,7 @@ import { loadBeatmaps, findBeatmap } from "../_shared/core/beatmaps.js"
 import { loadTeams, setTeamDisplays } from "../_shared/core/teams.js"
 import { createTosuWsSocket } from "../_shared/core/websocket.js"
 import { delay } from "../_shared/core/utils.js"
-import { toggleStars, setDefaultStarCount, updateStarCount } from "../_shared/core/stars.js"
+import { toggleStars, setDefaultStarCount, updateStarCount, isStarOn } from "../_shared/core/stars.js"
 
 // Team star containers
 const redTeamStarContainerEl = document.getElementById("red-team-star-container")
@@ -254,6 +254,9 @@ socket.onmessage = async event => {
     }
 
     // IPC State
+    const clients = data.tourney.clients
+    const numberOfClients = clients.length
+
     if (ipcState !== data.tourney.ipcState) {
         ipcState = data.tourney.ipcState
         if (ipcState !== 4) checkedWinner = false
@@ -265,7 +268,6 @@ socket.onmessage = async event => {
                 let blueScore = 0
                 
                 // Set scores
-                const numberOfClients = data.tourney.clients.length
                 for (let i = 0; i < numberOfClients; i++) {
                     const score = clients[i].play.accuracy
                     if (i < numberOfClients / 2) redScore += score
@@ -321,6 +323,47 @@ socket.onmessage = async event => {
     if (chatLen !== data.tourney.chat.length) {
         chatLen = updateChat(data.tourney.chat, chatLen, chatDisplayContainerEl)
     }
+
+    // Log Data
+    const logData = {
+        tournament: "VV",
+        isStarOn: isStarOn(),
+        ipcState: ipcState,
+        checkedWinner: checkedWinner,
+        playerInfo: {},
+        accInfo: {
+            team: {
+                left: 0,
+                right: 0
+            },
+            individual: {}
+        },
+        beatmapInfo: {
+            currentBeatmapId: mapId,
+            currentBeatmapMapDetails: findBeatmap(mapId)
+        }
+    }
+
+    // Populate player info
+    for (let i = 0; i < numberOfClients; i++) {
+        logData.playerInfo[`player${i + 1}Id`] = clients[i].user.id
+        logData.playerInfo[`player${i + 1}Name`] = clients[i].user.name
+    }
+
+    // Populate score info
+    let scoresLeft = 0, scoresRight = 0
+    for (let i = 0; i < numberOfClients; i++) {
+        const currentScore = clients[i].play.accuracy
+        logData.accInfo.individual[`player${i + 1}`] = currentScore
+        if (i < numberOfClients / 2) scoresLeft += currentScore
+        else scoresRight += currentScore
+    }
+
+    // Populate team score info
+    scoresLeft = Math.round(scoresLeft / (numberOfClients / 2))
+    scoresRight = Math.round(scoresRight / (numberOfClients / 2))
+    logData.accInfo.team.left = scoresLeft
+    logData.accInfo.team.right = scoresRight
 }
 
 // Set Autopicker
@@ -606,10 +649,10 @@ function updateCurrentPicker(side) {
     document.cookie = `currentPicker=${side}; path=/`
 }
 
+// Toggle stars button
+const toggleStarButtonEl = document.getElementById("toggle-stars-button")
+const toggleStarsOnOffEl = document.getElementById("toggle-stars-on-off")
 document.addEventListener("DOMContentLoaded", () => {
-    // Toggle stars button
-    const toggleStarButtonEl = document.getElementById("toggle-stars-button")
-    const toggleStarsOnOffEl = document.getElementById("toggle-stars-on-off")
     toggleStarButtonEl.addEventListener("click", () => toggleStars(toggleStarsOnOffEl, toggleStarButtonEl, redTeamStarContainerEl, blueTeamStarContainerEl))
     document.cookie = `toggleStarContainers=${true}; path=/`
 

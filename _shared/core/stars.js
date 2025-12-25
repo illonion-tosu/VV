@@ -67,6 +67,11 @@ export function toggleStarContainers(redTeamStarContainerEl, blueTeamStarContain
     }
 }
 
+// Get isStarOn
+export function isStarOn() {
+    return getCookie("toggleStarContainers") === "true"
+}
+
 // Set Star Count Display
 export function renderStars(redTeamStarContainerEl, blueTeamStarContainerEl) {
     const renderStarCountRed = Number(getCookie("redStarCount"))
