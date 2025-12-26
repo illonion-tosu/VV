@@ -370,7 +370,7 @@ socket.onmessage = async event => {
     logData.accInfo.team.left = scoresLeft
     logData.accInfo.team.right = scoresRight
 
-    sendLog(logData, "log", getLogsApi())
+    // sendLog(logData, "log", getLogsApi())
 }
 
 // Set Autopicker

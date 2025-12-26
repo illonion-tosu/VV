@@ -59,6 +59,7 @@
     position: absolute;
     width: var(--dimension);
     height: var(--dimension);
+    background: center / cover;
 }
 .red-team-avatar { left: var(--team-avatar-x); }
 .blue-team-avatar { right: var(--team-avatar-x); }

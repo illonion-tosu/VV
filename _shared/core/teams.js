@@ -9,7 +9,7 @@ export async function loadTeams() {
 
 // Find team
 export function findTeam(team) {
-    return allTeams.find(t => t.team_name.toLowerCase().trim() === team.toLowerCase().trim())
+    return allTeams.find(t => t.teamName.toLowerCase().trim() === team.toLowerCase().trim())
 }
 
 // Set Team Displays
@@ -19,8 +19,8 @@ export function setTeamDisplays(teamName, teamNameElement, avatarElement, seedNu
     const team = findTeam(teamName)
     if (team) {
         // TOOD: Set actual team name
-        avatarElement.style.backgroundImage = `url("https://a.ppy.sh/2")`
-        seedNumberElement.textContent = team.seed
+        avatarElement.style.backgroundImage = `url("${team.teamIcon}")`
+        seedNumberElement.textContent = team.teamSeed
     }
 
     return teamName
