@@ -1,0 +1,59 @@
+:root {
+    --winner-text-x: 400px;
+}
+
+/* Absolute centre */
+.absolute-center-x {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Winner Text */
+.winner-text {
+    position: absolute;
+    top: 302px;
+    font-size: 100px;
+    letter-spacing: -23px;
+    color: var(--dark-gray);
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+}
+.winner-text-left { left: var(--winner-text-x); }
+.winner-text-right { right: var(--winner-text-x); }
+
+/* Round Name */
+.round-name {
+    top: 177px;
+    font-size: 25px;
+    color: var(--dark-gray);
+}
+
+/* Team Name */
+.team-name {
+    top: 228px;
+    font-size: 46px;
+    color: var(--dark-gray);
+}
+.team-icon {
+    top: 292px;
+    width: 137px;
+    height: 137px;
+    border: 3px solid #202020;
+    background: cover / center;
+}
+
+/* Player Name Container */
+.player-name-container {
+    top: 442px;
+    display: flex;
+    flex-wrap: wrap;
+    width: 890px;
+}
+.player-name {
+    width: 437px;
+    font-size: 33px;
+    margin: 0 4px 4px;
+}
+.player-name-odd { text-align: right; }
+.player-name-even { text-align: left; }

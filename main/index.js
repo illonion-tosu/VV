@@ -12,9 +12,7 @@ const roundNameBackEl = document.getElementById("round-name-back")
 
 // Load beatmaps and players
 let allBeatmaps = []
-let allTeams = []
 Promise.all([loadBeatmaps(), loadTeams()]).then(([beatmaps, teams]) => {
-    allTeams = teams
     allBeatmaps = beatmaps
     roundNameFrontEl.innerText = allBeatmaps.roundName
     roundNameBackEl.setAttribute("src", `static/rounds/${allBeatmaps.roundName}.png`)
