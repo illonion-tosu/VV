@@ -70,6 +70,10 @@
     position: absolute;
     top: 5px;
     letter-spacing: -0.75px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 480px;
 }
 .red-team-name { 
     color: var(--red-colour);

@@ -255,9 +255,9 @@ body { font-family: "Orlando Caps CG"; }
 }
 /* Apply Changes Button */
 .apply-changes-button {
-    margin-top: 30px;
+    margin-top: 15px;
     margin-left: 10px;
-    height: 50px;
+    height: 45px;
 }
 .apply-changes-button:active {
     background-color: var(--dark-gray);
