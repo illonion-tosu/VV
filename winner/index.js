@@ -12,7 +12,7 @@ Promise.all([loadBeatmaps(), loadTeams()]).then(([beatmaps, teams]) => {
 let currentTeamName, previousTeamName
 const teamNameEl = document.getElementById("team-name")
 const teamIconEl = document.getElementById("team-icon")
-const teamNameContainer = document.getElementById("team-name-container")
+const playerNameContainerEl = document.getElementById("player-name-container")
 setInterval(() => {
     // Get Team Name
     currentTeamName = getCookie("currentWinner")
@@ -29,13 +29,13 @@ setInterval(() => {
 
         // Set details
         teamIconEl.style.backgroundImage = `url("${teamDetails.teamIcon}")`
-        for (let i = 0; i < teamNameContainer.childElementCount; i++) {
+        for (let i = 0; i < playerNameContainerEl.childElementCount; i++) {
             if (teamDetails.playerNames[i]) {
-                teamNameContainer.children[i].style.display = "block"
-                teamNameContainer.children[i].textContent = teamDetails.playerNames[i]
+                playerNameContainerEl.children[i].style.display = "block"
+                playerNameContainerEl.children[i].textContent = teamDetails.playerNames[i]
                 continue
             }
-            teamNameContainer.children[i].style.display = "none"
+            playerNameContainerEl.children[i].style.display = "none"
         }
     }
 }, 200)

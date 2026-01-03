@@ -20,7 +20,7 @@ export function toggleStars(buttonText, button, redTeamStarContainerEl, blueTeam
     renderStars(redTeamStarContainerEl, blueTeamStarContainerEl)
 }
 
-export function updateStarCount(side, action, redTeamStarContainerEl, blueTeamStarContainerEl) {
+export function updateStarCount(side, action, redTeamStarContainerEl, blueTeamStarContainerEl, redTeamName, blueTeamName) {
     // Update star count
     if (side === "red" && action === "plus") redStarCount++
     else if (side === "red" && action === "minus") redStarCount--
@@ -35,6 +35,10 @@ export function updateStarCount(side, action, redTeamStarContainerEl, blueTeamSt
 
     saveStarCount()
     renderStars(redTeamStarContainerEl, blueTeamStarContainerEl)
+
+    // Set winner details
+    const currentWinner = redStarCount > blueStarCount ? redTeamName : blueStarCount > redStarCount ? blueTeamName : "none"
+    document.cookie = `currentWinner=${currentWinner}; path=/`
 }
 
 // Save Star Count

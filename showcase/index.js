@@ -1,4 +1,4 @@
-import { loadShowcaseBeatmaps, findShowcaseBeatmap } from "../_shared/core/data.js"
+import { loadShowcaseBeatmaps, findShowcaseBeatmap } from "../_shared/core/beatmaps.js"
 import { delay } from "../_shared/core/utils.js"
 import { createTosuWsSocket } from "../_shared/core/websocket.js"
 

@@ -4,7 +4,6 @@ let allBeatmaps = []
 // Load showcase beatmaps
 export async function loadShowcaseBeatmaps() {
     const response = await axios.get("../_data/showcase-beatmaps.json")
-    consol
     allShowcaseBeatmaps = response.data
     return allShowcaseBeatmaps
 }

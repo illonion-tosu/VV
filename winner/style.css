@@ -1,5 +1,5 @@
 :root {
-    --winner-text-x: 400px;
+    --winner-text-x: 350px;
 }
 
 /* Absolute centre */
@@ -48,12 +48,12 @@
     top: 442px;
     display: flex;
     flex-wrap: wrap;
-    width: 890px;
+    width: 934px;
 }
 .player-name {
     width: 437px;
     font-size: 33px;
-    margin: 0 4px 4px;
+    margin: 0 15px 4px;
 }
 .player-name-odd { text-align: right; }
 .player-name-even { text-align: left; }
