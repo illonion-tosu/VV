@@ -34,6 +34,7 @@
     top: 228px;
     font-size: 46px;
     color: var(--dark-gray);
+    text-align: center;
 }
 .team-icon {
     top: 292px;

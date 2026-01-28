@@ -82,6 +82,7 @@
 .blue-team-name { 
     color: var(--blue-colour);
     right: var(--team-name-x);
+    text-align: right;
 }
 
 /* Team Seed */
