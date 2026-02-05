@@ -316,7 +316,7 @@ socket.onmessage = async event => {
             if (currentPicker === "red") setAutopicker("blue")
             else if (currentPicker === "blue") setAutopicker("red")
         } else {
-            updateCurrentPicker("none")
+            setAutopicker("none")
         }
     }
 
