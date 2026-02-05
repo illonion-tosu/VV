@@ -66,14 +66,20 @@ const playingScoreDifferenceTextEl = document.getElementById("playing-score-diff
 const playingScoreDifferenceEl = document.getElementById("playing-score-difference")
 let currentRedScore, currentBlueScore, numberOfClients, numberOfClientsPerTeam
 
+// Accuracy Lines
 const redAccuracyLineEl = document.getElementById("red-accuracy-line")
 const blueAccuracyLineEl = document.getElementById("blue-accuracy-line")
 
+// Animations
 const countUpAnimations = {
     "redPlayingScore": new CountUp(redPlayingScoreEl, 0, 0, 2, 0.2, { useEasing: true, useGrouping: true, separator: ",", decimal: ".", suffix: "%" }),
     "bluePlayingScore": new CountUp(bluePlayingScoreEl, 0, 0, 2, 0.2, { useEasing: true, useGrouping: true, separator: ",", decimal: ".", suffix: "%" }),
     "playingScoreDifference": new CountUp(playingScoreDifferenceEl, 0, 0, 2, 0.2, { useEasing: true, useGrouping: true, separator: ",", decimal: ".", suffix: "%" }),
 }
+
+// Arrows
+const redDifferenceArrowEl = document.getElementById("red-difference-arrow")
+const blueDifferenceArrowEl = document.getElementById("red-difference-arrow")
 
 // Socket
 const socket = createTosuWsSocket()
@@ -111,6 +117,10 @@ socket.onmessage = async event => {
             bluePlayingScoreEl.style.opacity = 1
             playingScoreDifferenceTextEl.style.opacity = 1
             playingScoreDifferenceEl.style.opacity = 1
+
+            // Display arrows
+            redDifferenceArrowEl.style.opacity = 1
+            blueDifferenceArrowEl.style.opacity = 1
         } else {
             // Do chat animation
             chatDisplayEl.style.height = "154px"
@@ -129,6 +139,10 @@ socket.onmessage = async event => {
             // Accuracy lines
             redAccuracyLineEl.style.width = "660px"
             blueAccuracyLineEl.style.width = "660px"
+
+            // Hide arrows
+            redDifferenceArrowEl.style.opacity = 0
+            blueDifferenceArrowEl.style.opacity = 0
         }
     }
 
@@ -217,6 +231,18 @@ socket.onmessage = async event => {
         // Scorebar animations
         redAccuracyLineEl.style.width = `${(currentRedScore - 80) / 20 * 660}px`
         blueAccuracyLineEl.style.width = `${(currentBlueScore - 80) / 20 * 660}px`
+
+        // Show / Hide Arrows
+        if (currentRedScore > currentBlueScore) {
+            redDifferenceArrowEl.style.display = "block"
+            blueDifferenceArrowEl.style.display = "none"
+        } else if (currentRedScore === currentBlueScore) {
+            redDifferenceArrowEl.style.display = "none"
+            blueDifferenceArrowEl.style.display = "none"
+        } else if (currentRedScore < currentBlueScore) {
+            redDifferenceArrowEl.style.display = "none"
+            blueDifferenceArrowEl.style.display = "block"
+        }
     }
 }
 

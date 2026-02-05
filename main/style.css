@@ -311,3 +311,17 @@ body { font-family: "Orlando Caps CG"; }
     transform: scaleY(0.8) translateX(-50%);
     opacity: 1;
 }
+
+/* Difference Arrow */
+.difference-arrow {
+    position: absolute;
+    bottom: 7px;
+    font-size: 32px;
+    color: white;
+    font-family: inherit;
+    transform: scaleY(1.5) scaleX(0.75);
+    transition: 500ms ease-in-out;
+    opacity: 1;
+}
+.red-difference-arrow { right: 1060px; }
+.blue-difference-arrow { left: 1060px; }
